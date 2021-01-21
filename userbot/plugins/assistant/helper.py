@@ -42,7 +42,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         result = None
         query = event.text
         DEFAULTUSER = os.environ.get("ALIVE_NAME", None)
-        if event.query.user_id == bot.uid and query.startswith("help"):
+        if event.chat_id == bot.uid:
             rev_text = query[::-1]
             dc = paginate_help(0, CMD_LIST, "helpme")
             KEK = "Userbot Helper.. Provided by ✨{}✨ \n `Userbot Helper to reveal all the commands`\n__Do .help plugin_name for commands, in case popup doesn't appear.\n{}\nCurrently Loaded Plugins: {}".format(DEFAULTUSER, len(CMD_LIST))
