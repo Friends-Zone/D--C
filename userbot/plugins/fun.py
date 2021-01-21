@@ -1,10 +1,10 @@
 import random
-from userbot.functions.funts import DC_STYLE as DC_FONT_STYLE# yapf: disable
-from userbot.functions.funts import DARKFONTS as DCFONTS# yapf: disable
-from userbot.functions.funts import SIMPLESTDC as SIMPLEDC# yapf: disable
-
 
 from uniborg.util import admin_cmd
+
+from userbot.functions.funts import DARKFONTS as DCFONTS  # yapf: disable
+from userbot.functions.funts import DC_STYLE as DC_FONT_STYLE  # yapf: disable
+from userbot.functions.funts import SIMPLESTDC as SIMPLEDC  # yapf: disable
 
 METOOSTR = [
     "`Me too thanks`",
