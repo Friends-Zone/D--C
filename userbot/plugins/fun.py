@@ -1,5 +1,5 @@
 import random
-
+from userbot import bot as borg
 from uniborg.util import admin_cmd
 
 from userbot.functions.funts import DARKFONTS as DCFONTS  # yapf: disable
