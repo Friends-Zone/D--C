@@ -3,7 +3,7 @@ import random
 from telethon import Button, events
 
 from userbot import bot
-from userbot.helpers.styles.fun import DC_FONT_STYLE, DCFONTS, SIMPLEDC
+from userbot.plugins.fun import DC_FONT_STYLE, DCFONTS, SIMPLEDC
 from userbot.utils import admin_cmd
 
 
