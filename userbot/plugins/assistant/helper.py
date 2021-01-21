@@ -5,7 +5,7 @@ from math import ceil
 from var import Var
 from telethon import custom, events
 from telethon.tl.custom import Button
-
+from userbot.uniborgConfig import Config
 from userbot import CMD_HELP, CMD_LIST, bot
 
 # ABEE O KANGAR  BACK OPEN CLSE BTN KANG KIYA TO YE LONE CHIPKA DENA AUR GLOBALS K BINA NAHI CHALAGA aur global 5 gaja diff name and manipulation se imported hai
