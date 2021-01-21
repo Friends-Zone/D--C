@@ -88,7 +88,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
-            danish = custom.Button("◤✞ 𝕺𝖕𝖊𝖓 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 𝕬𝖌𝖆𝖎𝖓 ✞◥", data="open")
+            danish = custom.Button.inline("◤✞ 𝕺𝖕𝖊𝖓 𝕸𝖆𝖎𝖓 𝕸𝖊𝖓𝖚 𝕬𝖌𝖆𝖎𝖓 ✞◥", data="open")
             await event.edit("`Main Menu Has Been Closed`", buttons=danish)
         else:
             reply_pop_up_alert = "Please get your own Userbot😁😁,for more info visit @DARK_COBRA_SUPPORT! 😎😎"
@@ -127,9 +127,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         try:
             if event.query.user_id == bot.uid:
                 dc = [
-                    custom.Button(" 𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
-                    custom.Button(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
-                    custom.Button(
+                    custom.Button.inline(" 𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                    custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
+                    custom.Button.inline(
                         " 𝖀𝖓𝖑𝖔𝖆𝖉 ", data="unload({})".format(shivam_sh1vam)
                     ),
                 ]
@@ -140,10 +140,10 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         except:
             if event.query.user_id == bot.uid:
                 sh1vam = [
-                    custom.Button(
+                    custom.Button.inline(
                         "◤✞ 𝕲𝖔 𝕭𝖆𝖈𝖐 ✞◥", data="back({})".format(shivam)
                     ),
-                    custom.Button("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
+                    custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
                 ]
                 halps = "Do .help {} to get the list of commands.".format(plugin_name)
                 await event.edit(halps, buttons=sh1vam)
@@ -159,9 +159,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
             try:
                 fcix = [
-                    custom.Button("  𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
-                    custom.Button(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
-                    custom.Button(
+                    custom.Button.inline("  𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                    custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
+                    custom.Button.inline(
                         " 𝖀𝖓𝖑𝖔𝖆𝖉 ", data="unload({})".format(shivam_sh1vam)
                     ),
                 ]
@@ -183,9 +183,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             event.data_match.group(1).decode("UTF-8")
             fcix = [
-                custom.Button("  𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
-                custom.Button(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
-                custom.Button(
+                custom.Button.inline("  𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
+                custom.Button.inline(
                     " 𝖀𝖓𝖑𝖔𝖆𝖉 ", data="unload({})".format(shivam_sh1vam)
                 ),
             ]
@@ -200,9 +200,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
             try:
                 fcix = [
-                    custom.Button(" 𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
-                    custom.Button(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
-                    custom.Button(
+                    custom.Button.inline(" 𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                    custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
+                    custom.Button.inline(
                         " 𝕷𝖔𝖆𝖉 ", data="load({})".format(shivam_sh1vam)
                     ),
                 ]
@@ -224,9 +224,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             event.data_match.group(1).decode("UTF-8")
             fcix = [
-                custom.Button("  𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
-                custom.Button(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
-                custom.Button(" 𝕷𝖔𝖆𝖉 ", data="load({})".format(shivam_sh1vam)),
+                custom.Button.inline("  𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
+                custom.Button.inline(" 𝕷𝖔𝖆𝖉 ", data="load({})".format(shivam_sh1vam)),
             ]
             reply_pop_up_alert = (
                 "Please get your own Userbot,for more info visit @DARK_COBRA_SUPPORT!"
@@ -265,7 +265,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
             helpable_plugins.append(p)
     helpable_plugins = sorted(helpable_plugins)
     modules = [
-        custom.Button(
+        custom.Button.inline(
             "{} {}".format(random.choice(list(multi)), x), data="us_plugin_{}".format(x)
         )
         for x in helpable_plugins
@@ -282,11 +282,11 @@ def paginate_help(page_number, loaded_plugins, prefix):
             modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
         ] + [
             (
-                custom.Button(
+                custom.Button.inline(
                     "◃:✮𝙿𝚁𝙴𝚅.❃", data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                custom.Button("⋇⋆𝙲𝙻✦𝚂𝙴⋆⋇", data="close"),
-                custom.Button(
+                custom.Button.inline("⋇⋆𝙲𝙻✦𝚂𝙴⋆⋇", data="close"),
+                custom.Button.inline(
                     "❃.𝙽𝙴𝚇𝚃✮:▹", data="{}_next({})".format(prefix, modulo_page)
                 ),
             )
