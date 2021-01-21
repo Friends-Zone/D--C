@@ -13,6 +13,7 @@
 
 import asyncio
 import io
+import os
 import re
 
 from telethon import Button, custom, events
@@ -31,12 +32,18 @@ from userbot.plugins.sql_helper.idadder_sql import (
     get_all_users,
 )
 
+botpic = os.environ.get("BOT_PIC", None)
+banpic = os.environ.get("BOT_BAN_PIC", None)
+unbanpic = os.environ.get("BOT_UNBAN_PIC", None)
+
 
 @tgbot.on(events.NewMessage(pattern="^/start"))
 async def start(event):
     starkbot = await tgbot.get_me()
     bot_id = starkbot.first_name
     bot_username = starkbot.username
+    moi = await bot.get_me()
+    master = moi.first_name
     replied_user = await event.client(GetFullUserRequest(event.sender_id))
     firstname = replied_user.user.first_name
     vent = event.chat_id
@@ -45,9 +52,13 @@ async def start(event):
         await tgbot.send_message(
             vent,
             message=f"Hi Master, It's Me {bot_id}, Your Assistant ! \nWhat You Wanna Do today ?",
+            file=botpic,
             buttons=[
-                [custom.Button.inline("Show Users 🔥", data="users")],
-                [custom.Button.inline("Commands For Assistant", data="gibcmd")],
+                [
+                    custom.Button.inline("Show Users 🔥", data="users"),
+                    custom.Button.inline("Assistant Cmds", data="gibcmd"),
+                ],
+                [custom.Button.inline(f"About {master}", data="whoishe")],
                 [
                     Button.url(
                         "Add Me to Group 👥", f"t.me/{bot_username}?startgroup=true"
@@ -63,10 +74,11 @@ async def start(event):
         await tgbot.send_message(
             event.chat_id,
             message=starttext,
+            file=botpic,
             link_preview=False,
             buttons=[
+                [custom.Button.inline(f"About {master}", data="whoishe")],
                 [custom.Button.inline("Deploy your DarkCobra 🐍", data="deploy")],
-                [Button.url("Help Me ❓", "https://t.me/Dark_cobra_support_group")],
             ],
         )
 
@@ -82,8 +94,13 @@ async def help(event):
             event.chat_id,
             message="You Can Deploy DARKCOBRA In Heroku By Following Steps Bellow, You Can See Some Quick Guides On Support Channel Or On Your Own Assistant Bot. \nThank You For Contacting Me.",
             buttons=[
-                [Button.url("Deploy Tutorial 📺", "http://www.youtube.com/watch?v=-MbQO6kmP8o")],
-                [Button.url("Need Help ❓", "https://t.me/Dark_cobra_support_group")],
+                [
+                    Button.url(
+                        "Deploy Tutorial 📺",
+                        "http://www.youtube.com/watch?v=-MbQO6kmP8o",
+                    ),
+                    Button.url("Need Help ❓", "https://t.me/Dark_cobra_support_group"),
+                ],
             ],
         )
 
@@ -114,6 +131,19 @@ async def users(event):
     await event.delete()
     grabon = "Hello Here Are Some Commands \n➤ /start - Check if I am Alive \n➤ /ping - Pong! \n➤ /tr <lang-code> \n➤ /broadcast - Sends Message To all Users In Bot \n➤ /id - Shows ID of User And Media. \n➤ /addnote - Add Note \n➤ /notes - Shows Notes \n➤ /rmnote - Remove Note \n➤ /alive - Am I Alive? \n➤ /bun - Works In Group , Bans A User. \n➤ /unbun - Unbans A User in Group \n➤ /prumote - Promotes A User \n➤ /demute - Demotes A User \n➤ /pin - Pins A Message \n➤ /stats - Shows Total Users In Bot \n➤ /purge - Reply It From The Message u Want to Delete (Your Bot Should be Admin to Execute It) \n➤ /del - Reply a Message Tht Should Be Deleted (Your Bot Should be Admin to Execute It)"
     await tgbot.send_message(event.chat_id, grabon)
+
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"whoishe")))
+async def whoisme(e):
+    await e.delete()
+    moi = await bot.get_me()
+    master = moi.first_name
+    puck = "Hello!\nIt seems like you want to know about my master.🤔🤔🤔\nOK To know about my master join here😁😀😊."
+    await tgbot.send_message(
+        e.chat_id,
+        puck,
+        buttons=[[Button.url(f"About {master}", "https://t.me/ProgrammingError")]],
+    )
 
 
 # Bot Permit.
@@ -191,6 +221,19 @@ async def starkislub(event):
 
 
 @tgbot.on(
+    events.NewMessage(
+        pattern="^/dcizready ?(.*)", func=lambda e: e.sender_id == bot.uid
+    )
+)
+async def ready(event):
+    await event.delete()
+    await tgbot.send_message(
+        event.chat_id,
+        "DARK COBRA userbot AND YOUR ASSISTANT is Ready at your service! Enjoy",
+    )
+
+
+@tgbot.on(
     events.NewMessage(pattern="^/block ?(.*)", func=lambda e: e.sender_id == bot.uid)
 )
 async def starkisnoob(event):
@@ -205,7 +248,9 @@ async def starkisnoob(event):
         add_nibba_in_db(user_id)
         await event.reply("Blacklisted This Dumb Person")
         await tgbot.send_message(
-            user_id, "You Have Been Blacklisted And You Can't Message My Master Now."
+            user_id,
+            "You Have Been Blacklisted And You Can't Message My Master Now.",
+            file=banpic,
         )
 
 
@@ -224,5 +269,5 @@ async def starkisnoob(event):
         removenibba(user_id)
         await event.reply("DisBlacklisted This Dumb Person")
         await tgbot.send_message(
-            user_id, "Congo! You Have Been Unblacklisted By My Master."
+            user_id, "Congo! You Have Been Unblacklisted By My Master.", file=unbanpic
         )
