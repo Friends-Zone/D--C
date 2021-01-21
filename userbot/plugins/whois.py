@@ -2,8 +2,6 @@
 Syntax: .whois @username/userid"""
 
 
-
-
 import html
 import os
 
@@ -15,10 +13,6 @@ from telethon.utils import get_input_location
 
 from .. import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
 from ..utils import admin_cmd, edit_or_reply
-
-
-
-
 
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
@@ -121,7 +115,9 @@ async def get_full_user(event):
                 )
             )
             return replied_user, None
-        replied_user = await event.client(GetFullUserRequest(previous_message.sender_id))
+        replied_user = await event.client(
+            GetFullUserRequest(previous_message.sender_id)
+        )
         return replied_user, None
     if event.is_private:
         try:
@@ -170,7 +166,9 @@ async def get_user(event):
     """ Get the user from argument or replied message. """
     if event.reply_to_msg_id and not event.pattern_match.group(1):
         previous_message = await event.get_reply_message()
-        replied_user = await event.client(GetFullUserRequest(previous_message.sender_id))
+        replied_user = await event.client(
+            GetFullUserRequest(previous_message.sender_id)
+        )
     else:
         user = event.pattern_match.group(1)
         if user.isnumeric():
@@ -303,9 +301,7 @@ async def ge(user, event):
         return None
     return user_obj
 
+
 CMD_HELP.update(
-    {
-        "whois": ".whois @username/userid"
-    "\nUsage: Get Telegram User Information. \n\n"
-    }
+    {"whois": ".whois @username/userid" "\nUsage: Get Telegram User Information. \n\n"}
 )

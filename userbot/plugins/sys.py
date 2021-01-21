@@ -1,30 +1,20 @@
 ##
 
 
-
-
-
-
-
 #
 import platform
 import shutil
 import sys
-import time
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from datetime import datetime
 from os import remove
-from platform import python_version, uname
 from shutil import which
 
 import psutil
-from telethon import __version__, version
-import var as Var
-from userbot import CMD_LIST, ALIVE_NAME, CMD_HELP,  bot
+from telethon import __version__
 
 from userbot.events import register
-
 
 
 async def get_readable_time(seconds: int) -> str:
@@ -168,9 +158,7 @@ async def bot_ver(event):
                 "`Userbot Version: " f"{verout}" "` \n" "`Revision: " f"{revout}" "`"
             )
         else:
-            await event.edit(
-                "Don't bother me😑😑 ,you're running - 'DC 2.0' anyway!"
-            )
+            await event.edit("Don't bother me😑😑 ,you're running - 'DC 2.0' anyway!")
 
 
 @register(outgoing=True, pattern="^.pip(?: |$)(.*)")
@@ -219,7 +207,3 @@ async def pipcheck(pip):
                 )
         else:
             await pip.edit("`Use .help pip to see an example`")
-
-
-
-

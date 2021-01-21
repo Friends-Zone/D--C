@@ -2,9 +2,8 @@
 # Thx to @DeletedUser420
 
 
+from userbot import CMD_HELP
 from userbot.events import register
-from userbot import bot, CMD_HELP
-from telethon import events
 
 # from uniborg.util import admin_cmd
 

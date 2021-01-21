@@ -1,4 +1,3 @@
-
 # Now will be used in DARK COBRA too....
 
 import asyncio
@@ -10,11 +9,6 @@ from telethon.tl import functions, types
 
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd
-
-
-
-
-
 
 #####################################################################
 
@@ -185,4 +179,3 @@ CMD_HELP.update(
         "\nUsage mention u as afk when someone tag or reply to any of ur msg or dm."
     }
 )
-

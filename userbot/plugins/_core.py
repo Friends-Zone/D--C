@@ -3,10 +3,10 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-from userbot import ALIVE_NAME
-from userbot import bot 
-from userbot.utils import admin_cmd, load_module, remove_plugin, sudo_cmd
+from userbot import ALIVE_NAME, bot
+from userbot.utils import admin_cmd
 from userbot.utils import edit_or_reply as eor
+from userbot.utils import load_module, remove_plugin, sudo_cmd
 
 DELETE_TIMEOUT = 3
 thumb_image_path = "./Resources/IMG_20201005_150245_168.jpg"
@@ -40,7 +40,9 @@ async def send(event):
             f"**==> Plugin name:** `{input_str}`\n**==> Uploaded in {time_taken_in_ms} seconds only.**\n**==> Uploaded by:** [{DEFAULTUSER}](tg://user?id={hmm})\n",
         )
         await asyncio.sleep(DELETE_TIMEOUT)
-        await event.edit("__sent!!__") #only italic if loaded markdown else it doesn't look gr8
+        await event.edit(
+            "__sent!!__"
+        )  # only italic if loaded markdown else it doesn't look gr8
     else:
         await eor(event, "**404**: __File Not Found__")
 
@@ -92,7 +94,9 @@ async def unload(event):
         qwe = await eor(event, f"DarkCobra Has Successfully unloaded {shortname}")
     except Exception as e:
         await qwe.edit(
-            "Darkcobra has Successfully unloaded {shortname}\n{}".format(shortname, str(e))
+            "Darkcobra has Successfully unloaded {shortname}\n{}".format(
+                shortname, str(e)
+            )
         )
 
 

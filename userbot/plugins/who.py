@@ -1,12 +1,9 @@
-
 import html
-from userbot import CMD_HELP
-from telethon import events
-from telethon import utils
+
+from telethon import events, utils
 from telethon.tl import types
-from telethon.errors import (BadRequestError, ChatAdminRequiredError,
-                             ImageProcessFailedError, PhotoCropSizeSmallError,
-                             UserAdminInvalidError)
+
+from userbot import CMD_HELP
 
 
 def get_who_string(who):
@@ -24,22 +21,20 @@ async def _(event):
     else:
         msg = await event.message.get_reply_message()
         if msg.forward:
-          	# FIXME forward privacy memes
-            who = await borg.get_entity(
-                msg.forward.sender_id or msg.forward.channel_id)
+            # FIXME forward privacy memes
+            who = await borg.get_entity(msg.forward.sender_id or msg.forward.channel_id)
         else:
             who = await msg.get_sender()
 
-    await event.edit(get_who_string(who), parse_mode='html')
+    await event.edit(get_who_string(who), parse_mode="html")
 
 
 @borg.on(events.NewMessage(pattern=r"\.members", outgoing=True))
 async def _(event):
-    members = [
-        get_who_string(m) async for m in borg.iter_participants(event.chat_id)
-    ]
+    members = [get_who_string(m) async for m in borg.iter_participants(event.chat_id)]
 
-    await event.edit("\n".join(members), parse_mode='html')
+    await event.edit("\n".join(members), parse_mode="html")
+
 
 CMD_HELP.update(
     {

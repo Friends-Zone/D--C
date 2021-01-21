@@ -5,112 +5,113 @@
 # If you remove these 5 lines you are the geyest gey in the whole world..
 import json
 import urllib.request
-import requests 
+
+import requests
 from bs4 import BeautifulSoup
 
-from userbot.utils import admin_cmd 
-from userbot.utils import edit_or_reply
-from userbot import CMD_HELP
-from userbot import bot 
+from userbot import CMD_HELP, bot
+from userbot.utils import admin_cmd, edit_or_reply
 
 
 @bot.on(admin_cmd(pattern="nmap (.*)"))
 async def _(event):
     if event.fwd_from:
-        return      
+        return
     try:
         cipher = await edit_or_reply(event, "Fecthing Nmap Ip/Host Info, please wait..")
-        input_str = event.pattern_match.group(1) 
+        input_str = event.pattern_match.group(1)
         adress = input_str
         api = f"http://api.hackertarget.com/nmap/?q={adress}"
-        soup = BeautifulSoup(requests.get(api).content, "html.parser")   
-        soup = str(soup) 
+        soup = BeautifulSoup(requests.get(api).content, "html.parser")
+        soup = str(soup)
         first_line = soup.split("\n")[0]
-        other_lines =  soup.split("\n")[1:]
+        other_lines = soup.split("\n")[1:]
         for line in other_lines:
-            await cipher.edit(line) 
-            print('\n\n✨ ©DARK COBRA ✨') 
+            await cipher.edit(line)
+            print("\n\n✨ ©DARK COBRA ✨")
     except:
-            await cipher.edit("Not a Valid ip/host or Don't Have Enough Info.")
-    
-        
-        
+        await cipher.edit("Not a Valid ip/host or Don't Have Enough Info.")
+
+
 @bot.on(admin_cmd(pattern="honeypot (.*)"))
 async def _(event):
     if event.fwd_from:
-        return      
+        return
     try:
-        cipher = await edit_or_reply(event, "`Fetching Honeypot Ip Info, Please wait..`")
-        input_str = event.pattern_match.group(1) 
+        cipher = await edit_or_reply(
+            event, "`Fetching Honeypot Ip Info, Please wait..`"
+        )
+        input_str = event.pattern_match.group(1)
         adress = input_str
-        api = (f"https://api.shodan.io/labs/honeyscore/{adress}?key=C23OXE0bVMrul2YeqcL7zxb6jZ4pj2by") 
+        api = f"https://api.shodan.io/labs/honeyscore/{adress}?key=C23OXE0bVMrul2YeqcL7zxb6jZ4pj2by"
         soup = BeautifulSoup(requests.get(api).content, "html.parser")
         for line in soup:
-            await cipher.edit('Honeypot Probabilty: ', line, '\n\n✨ ©DARK COBRA ✨')
+            await cipher.edit("Honeypot Probabilty: ", line, "\n\n✨ ©DARK COBRA ✨")
     except:
-            await cipher.edit("Not a Valid ip or Don't Have Enough Info.")
-    
+        await cipher.edit("Not a Valid ip or Don't Have Enough Info.")
+
 
 @bot.on(admin_cmd(pattern="ipreverse (.*)"))
 async def _(event):
     if event.fwd_from:
-        return      
+        return
     try:
         cipher = await edit_or_reply(event, "Fecthing Reverse Ip Info, Please wait...")
-        input_str = event.pattern_match.group(1) 
+        input_str = event.pattern_match.group(1)
         adress = input_str
-        api = (f'https://api.hackertarget.com/reverseiplookup/?q={adress}') 
-        soup = BeautifulSoup(requests.get(api).content, "html.parser")
+        api = f"https://api.hackertarget.com/reverseiplookup/?q={adress}"
+        BeautifulSoup(requests.get(api).content, "html.parser")
         for line in other_lines:
-            await cipher.edit('Reverse Ip Lookup Result: \n\n', line , '\n\n✨ ©DARK COBRA ✨')
+            await cipher.edit(
+                "Reverse Ip Lookup Result: \n\n", line, "\n\n✨ ©DARK COBRA ✨"
+            )
     except:
-            await cipher.edit("Not a Valid ip or Don't Have Enough Info.")
-    
-
+        await cipher.edit("Not a Valid ip or Don't Have Enough Info.")
 
 
 @bot.on(admin_cmd(pattern="dnslookup (.*)"))
 async def _(event):
     if event.fwd_from:
-        return      
+        return
     try:
         cipher = await edit_or_reply(event, "Fecthing dns Lookup Info, Please wait...")
-        input_str = event.pattern_match.group(1) 
+        input_str = event.pattern_match.group(1)
         adress = input_str
-        api = (f'https://api.hackertarget.com/dnslookup/?q={adress}') 
-        soup = BeautifulSoup(requests.get(api).content, "html.parser")
+        api = f"https://api.hackertarget.com/dnslookup/?q={adress}"
+        BeautifulSoup(requests.get(api).content, "html.parser")
         for line in other_lines:
-            await cipher.edit('DNS Lookup Result: \n\n', line , '\n\n✨ ©DARK COBRA ✨')
+            await cipher.edit("DNS Lookup Result: \n\n", line, "\n\n✨ ©DARK COBRA ✨")
     except:
-            await cipher.edit("Not a Valid ip/host or Don't Have Enough Info.")
-    
-
+        await cipher.edit("Not a Valid ip/host or Don't Have Enough Info.")
 
 
 @bot.on(admin_cmd(pattern="ipwhois (.*)"))
 async def _(event):
     if event.fwd_from:
-        return      
+        return
     try:
         cipher = await edit_or_reply(event, "Fetching Whois Ip Info, Please wait...")
-        input_str = event.pattern_match.group(1) 
+        input_str = event.pattern_match.group(1)
         adress = input_str
-        api = (f'http://api.hackertarget.com/whois/?q={adress}')
-        soup = BeautifulSoup(requests.get(api).content, "html.parser")
+        api = f"http://api.hackertarget.com/whois/?q={adress}"
+        BeautifulSoup(requests.get(api).content, "html.parser")
         for line in other_lines:
-            await cipher.edit('Wois Result: \n\n', line , '\n\n✨ ©DARK COBRA ✨')
+            await cipher.edit("Wois Result: \n\n", line, "\n\n✨ ©DARK COBRA ✨")
     except:
-            await cipher.edit("Not a Valid ip or Don't Have Enough Info.")
-    
+        await cipher.edit("Not a Valid ip or Don't Have Enough Info.")
+
+
 @bot.on(admin_cmd(pattern="advanceip (.*)"))
 async def _(event):
     if event.fwd_from:
-        return      
+        return
     try:
-        cipher = await edit_or_reply(event, "Fecthing Advanced Ip/Host Info, Please wait...")
-        input_str = event.pattern_match.group(1) 
+        cipher = await edit_or_reply(
+            event, "Fecthing Advanced Ip/Host Info, Please wait..."
+        )
+        input_str = event.pattern_match.group(1)
         adress = input_str
-        api = 'http://ip-api.com/json/' + adress
+        api = "http://ip-api.com/json/" + adress
         result = urllib.request.urlopen(api).read()
         result = result.decode()
         result = json.loads(result)
@@ -128,12 +129,12 @@ async def _(event):
         l = result["org"]
         m = result["as"]
         n = result["query"]
-        output = (f"<b><u>Information Gathered Successfully</b></u>\n\n<b>Ip Adress :- </b><code>{n}</code>\n<b>Status :-</b><code>{a}</code>\n<b>Country:- </b> <code>{b}</code>\n<b>Country Code:-</b><code>{c}</code>\n<b>Region :- </b><code>{d}</code>\n<b>Region Name :-</b><code>{e}</code>\n<b>City:- </b> <code>{f}</code>\n<b>Zip :- </b><code>{g}</code>\n<b>Latitude :- </b><code>{h}</code>\n<b>Longitude :- </b><code>{i}</code>\n<b>Timezone :- </b><code>{j}</code>\n<b>ISP :- </b><code>{k}</code>\n<b>ORG :- </b><code>{l}</code>\n<b>AS :- </b><code>{m}</code>\n\n✨ ©DARK COBRA ✨")  
+        output = f"<b><u>Information Gathered Successfully</b></u>\n\n<b>Ip Adress :- </b><code>{n}</code>\n<b>Status :-</b><code>{a}</code>\n<b>Country:- </b> <code>{b}</code>\n<b>Country Code:-</b><code>{c}</code>\n<b>Region :- </b><code>{d}</code>\n<b>Region Name :-</b><code>{e}</code>\n<b>City:- </b> <code>{f}</code>\n<b>Zip :- </b><code>{g}</code>\n<b>Latitude :- </b><code>{h}</code>\n<b>Longitude :- </b><code>{i}</code>\n<b>Timezone :- </b><code>{j}</code>\n<b>ISP :- </b><code>{k}</code>\n<b>ORG :- </b><code>{l}</code>\n<b>AS :- </b><code>{m}</code>\n\n✨ ©DARK COBRA ✨"
         await cipher.edit(output, parse_mode="HTML")
     except:
         await cipher.edit("Not a Valid ip/host or Don't Have Enough Info.")
-    
-    
+
+
 CMD_HELP.update(
     {
         "cipherxiptools": "cipherxiptools\
@@ -150,4 +151,4 @@ CMD_HELP.update(
         \n\nSyntax :  .advanceip <ip/host>\
         \nUsage : Find the most detailed Geo information of an ip/host."
     }
-) 
+)

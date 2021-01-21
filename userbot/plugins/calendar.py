@@ -1,11 +1,11 @@
 """Malayalam Calendar plugin for @UniBorg
 SYNTAX: .calendar YYYY-MM-DD"""
-from telethon import events
-import asyncio
-from datetime import datetime
-import requests
 import json
+from datetime import datetime
+
+import requests
 from uniborg.util import admin_cmd
+
 from userbot import CMD_HELP
 
 
@@ -20,7 +20,9 @@ async def _(event):
         yyyy = input_sgra[0]
         mm = input_sgra[1]
         dd = input_sgra[2]
-        required_url = "https://calendar.kollavarsham.org/api/years/{}/months/{}/days/{}?lang={}".format(yyyy, mm, dd, "en")
+        required_url = "https://calendar.kollavarsham.org/api/years/{}/months/{}/days/{}?lang={}".format(
+            yyyy, mm, dd, "en"
+        )
         headers = {"Accept": "application/json"}
         response_content = requests.get(required_url, headers=headers).json()
         a = ""
@@ -33,10 +35,7 @@ async def _(event):
     else:
         await event.edit("SYNTAX: .calendar YYYY.MM.DD")
     end = datetime.now()
-    ms = (end - start).seconds
-CMD_HELP.update(
-    {
-        "calendar": 
-    ".calendar YYYY.MM.DD "
-    "\nshow calendar"
-    })
+    (end - start).seconds
+
+
+CMD_HELP.update({"calendar": ".calendar YYYY.MM.DD " "\nshow calendar"})

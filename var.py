@@ -10,6 +10,5 @@ else:
 Var = Config
 
 
-
-#fk uuh...
-#keep spying..
+# fk uuh...
+# keep spying..

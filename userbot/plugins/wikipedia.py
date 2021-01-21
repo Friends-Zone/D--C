@@ -3,11 +3,12 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 """WikiPedia.ORG
 Syntax: .wikipedia Query"""
-from telethon import events
 import requests
 import wikipedia
-from userbot.utils import admin_cmd
+
 from userbot import CMD_HELP
+from userbot.utils import admin_cmd
+
 
 @borg.on(admin_cmd(pattern="wikipedia (.*)"))
 async def _(event):
@@ -21,8 +22,9 @@ async def _(event):
         page = wikipedia.page(s)
         url = page.url
         result += f"> [{s}]({url}) \n"
-    await event.edit("WikiPedia **Search**: {} \n\n **Result**: \n\n{}".format(input_str, result))
-
+    await event.edit(
+        "WikiPedia **Search**: {} \n\n **Result**: \n\n{}".format(input_str, result)
+    )
 
 
 @borg.on(admin_cmd(pattern="wikimedia (.*)"))
@@ -36,7 +38,7 @@ async def _(event):
         "5",
         input_str,
         "timestamp|user|url|mime|thumbmime|mediatype",
-        "json"
+        "json",
     )
     r = requests.get(url).json()
     result = ""
@@ -58,14 +60,17 @@ async def _(event):
         user: [{}]({})
         mime: {}
         mediatype: {}
-        """.format(pageid, title, timestamp, user, descriptionurl, mime, mediatype)
+        """.format(
+            pageid, title, timestamp, user, descriptionurl, mime, mediatype
+        )
     await event.edit("**Search**: {} \n\n **Results**: {}".format(input_str, result))
 
-CMD_HELP.update({
-    "wiki":
-    ".wikimedia [query]\
+
+CMD_HELP.update(
+    {
+        "wiki": ".wikimedia [query]\
 \nUsage: search ur query through wiki.\
 \n\n.wikipedia [query]\
 \nUsage: search ur query in wiki nd media.  "
-
-})
+    }
+)

@@ -9,6 +9,7 @@ import os
 import time
 
 from telethon.tl.types import DocumentAttributeFilename
+
 from userbot import CMD_HELP, bot
 from userbot.events import register
 from userbot.utils import progress
@@ -27,12 +28,17 @@ async def ssvideo(framecap):
             return await framecap.edit("`hey..dont put that much`")
     except BaseException:
         return await framecap.edit("`Please input number of frame!`")
-    if (reply_message.photo
-            or (DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
-                in reply_message.media.document.attributes)
-            or (DocumentAttributeFilename(file_name="sticker.webp")
-                in reply_message.media.document.attributes)
-            ):
+    if (
+        reply_message.photo
+        or (
+            DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
+            in reply_message.media.document.attributes
+        )
+        or (
+            DocumentAttributeFilename(file_name="sticker.webp")
+            in reply_message.media.document.attributes
+        )
+    ):
         return await framecap.edit("`Unsupported files!`")
     c_time = time.time()
     await framecap.edit("`Downloading media...`")
@@ -56,6 +62,7 @@ async def ssvideo(framecap):
     except BaseException as e:
         await framecap.edit(f"{e}")
     os.system("rm -rf *.png *.mp4")
+
 
 CMD_HELP.update(
     {

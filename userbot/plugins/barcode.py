@@ -4,12 +4,13 @@ By @snappy101
 """
 
 import asyncio
-import barcode
 import os
-import time
-from barcode.writer import ImageWriter
 from datetime import datetime
+
+import barcode
+from barcode.writer import ImageWriter
 from uniborg.util import admin_cmd
+
 from userbot import CMD_HELP
 
 
@@ -60,11 +61,13 @@ async def _(event):
     end = datetime.now()
     ms = (end - start).seconds
     await event.edit("Created BarCode in {} seconds".format(ms))
-    await asyncio.sleep(2) 
+    await asyncio.sleep(2)
     await event.delete()
+
+
 CMD_HELP.update(
     {
-        "barcode": 
-    ".barcode <reply to any text> "
-    "\nCreate a barcode for that text 😂😂(not work in media)"
-    })
+        "barcode": ".barcode <reply to any text> "
+        "\nCreate a barcode for that text 😂😂(not work in media)"
+    }
+)

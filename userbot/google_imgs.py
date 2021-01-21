@@ -9,7 +9,6 @@
 # Import Libraries 
 # import encodes as request
 import sys
-import ast
 version = (3, 0)
 cur_version = sys.version_info
 if cur_version >= version:  # If the Current Version of Python is 3.0 or above
@@ -36,7 +35,6 @@ import datetime
 import json
 import re
 import codecs
-import socket
 
 args_list = ["keywords", "keywords_from_file", "prefix_keywords", "suffix_keywords",
              "limit", "format", "color", "color_type", "usage_rights", "size",
@@ -63,7 +61,7 @@ def user_input():
             for key, value in json_file['Records'][record].items():
                 arguments[key] = value
             records.append(arguments)
-        records_count = len(records)
+        len(records)
     else:
         # Taking command line arguments from users
         parser = argparse.ArgumentParser()
@@ -143,7 +141,7 @@ class googleimagesdownload:
                 resp = urllib.request.urlopen(req)
                 respData = str(resp.read())
                 return respData
-            except Exception as e:
+            except Exception:
                 print("Could not open URL. Please check your internet connection and/or ssl settings \n"
                       "If you are using proxy, make sure your proxy settings is configured correctly")
                 sys.exit()
@@ -296,7 +294,6 @@ class googleimagesdownload:
         except OSError as e:
             if e.errno != 17:
                 raise
-            pass
         req = Request(url, headers={
             "User-Agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"})
 
@@ -342,7 +339,7 @@ class googleimagesdownload:
 
                 newurl = "https://www.google.com/search?tbs=sbi:" + urll + "&site=search&sa=X"
                 req2 = urllib.request.Request(newurl, headers=headers)
-                resp2 = urllib.request.urlopen(req2)
+                urllib.request.urlopen(req2)
                 l3 = content.find('/search?sa=X&amp;q=')
                 l4 = content.find(';', l3 + 19)
                 urll2 = content[l3 + 19:l4]
@@ -364,7 +361,7 @@ class googleimagesdownload:
 
                 newurl = "https://www.google.com/search?tbs=sbi:" + urll + "&site=search&sa=X"
                 req2 = urllib2.Request(newurl, headers=headers)
-                resp2 = urllib2.urlopen(req2)
+                urllib2.urlopen(req2)
                 l3 = content.find('/search?sa=X&amp;q=')
                 l4 = content.find(';', l3 + 19)
                 urll2 = content[l3 + 19:l4]
@@ -505,7 +502,6 @@ class googleimagesdownload:
         except OSError as e:
             if e.errno != 17:
                 raise
-            pass
 
 
     # Download Image thumbnails

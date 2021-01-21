@@ -2,10 +2,11 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from telethon import events
 from telethon.tl.functions.messages import SaveDraftRequest
-from userbot.utils import admin_cmd
+
 from userbot import CMD_HELP
+from userbot.utils import admin_cmd
+
 
 @borg.on(admin_cmd(pattern="chain"))
 async def _(event):
@@ -15,11 +16,11 @@ async def _(event):
     while message:
         reply = await message.get_reply_message()
         if reply is None:
-            await borg(SaveDraftRequest(
-                await event.get_input_chat(),
-                "",
-                reply_to_msg_id=message.id
-            ))
+            await borg(
+                SaveDraftRequest(
+                    await event.get_input_chat(), "", reply_to_msg_id=message.id
+                )
+            )
         message = reply
         count += 1
     await event.edit(f"Chain length: {count}")
@@ -27,7 +28,7 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "chain": 
-    ".chain <reply to any msg> "
-    "\nCount the chain length means the reply-reply how many times 😂😂"
-    })
+        "chain": ".chain <reply to any msg> "
+        "\nCount the chain length means the reply-reply how many times 😂😂"
+    }
+)

@@ -1,11 +1,13 @@
 # Created By @krish1303y For Black Lightning
 # For Setting Remainder In TG
 
+import asyncio
+
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-import asyncio 
-from userbot.utils import admin_cmd
+
 from userbot import CMD_HELP
+from userbot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="skeedy?(.*)"))
@@ -42,11 +44,9 @@ async def _(event):
             await event.edit("👀")
         else:
             await event.delete()
-            await event.client.send_file(event.chat_id, response.message)   
-        
+            await event.client.send_file(event.chat_id, response.message)
+
+
 CMD_HELP.update(
-    {
-        "skeedy": "`.skeedy (reason for remainder) (Time)`"
-        "\nUsage Set a remainder."
-    }
+    {"skeedy": "`.skeedy (reason for remainder) (Time)`" "\nUsage Set a remainder."}
 )

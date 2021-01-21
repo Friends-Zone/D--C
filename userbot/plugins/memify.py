@@ -1,24 +1,23 @@
+# Fully Modified By @danish_00
+#
+# Team Cobra
+# Dark
 
 
-
-    # Fully Modified By @danish_00
-    # 
-    # Team Cobra
-    # Dark
-
-
+import os
+import shutil
+import textwrap
 
 import cv2
-import os, io,random, shutil, re ,textwrap
-import lottie
-from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFont
+
 from userbot.utils import admin_cmd
 
 path = "./dcobra/"
 if not os.path.isdir(path):
     os.makedirs(path)
-    
-    
+
+
 @bot.on(admin_cmd(outgoing=True, pattern="mmf ?(.*)"))
 async def mim(event):
     if not event.reply_to_msg_id:
@@ -28,12 +27,10 @@ async def mim(event):
         return
     reply = await event.get_reply_message()
     imgs = await bot.download_media(reply.media, path)
-    img = cv2.VideoCapture(imgs) 
+    img = cv2.VideoCapture(imgs)
     tal, cobra = img.read()
     cv2.imwrite("danish.webp", cobra)
-    await event.edit(
-        "```Memefying 🔸🔸🔸```"
-    )
+    await event.edit("```Memefying 🔸🔸🔸```")
     text = event.pattern_match.group(1)
     webp_file = await draw_meme_text("danish.webp", text)
     await event.client.send_file(
@@ -151,6 +148,7 @@ async def draw_meme_text(image_path, text):
     img.save(image_name, "WebP")
     return image_name
 
+
 @bot.on(admin_cmd(outgoing=True, pattern="mms ?(.*)"))
 async def mim(event):
     if not event.reply_to_msg_id:
@@ -160,17 +158,13 @@ async def mim(event):
         return
     reply = await event.get_reply_message()
     imgs = await bot.download_media(reply.media, path)
-    img = cv2.VideoCapture(imgs) 
+    img = cv2.VideoCapture(imgs)
     tal, cobra = img.read()
     cv2.imwrite("danish.webp", cobra)
-    await event.edit(
-        "```Memifying 🔸🔸🔸 ```"
-    )
+    await event.edit("```Memifying 🔸🔸🔸 ```")
     text = event.pattern_match.group(1)
     photo = await draw_meme("danish.webp", text)
-    await event.client.send_file(
-        event.chat_id, photo, reply_to=event.reply_to_msg_id
-    )
+    await event.client.send_file(event.chat_id, photo, reply_to=event.reply_to_msg_id)
     await event.delete()
     shutil.rmtree(path)
     os.remove("danish.webp")

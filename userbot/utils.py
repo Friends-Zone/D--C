@@ -11,16 +11,12 @@ import math
 import os
 import time
 import asyncio
-from traceback import format_exc
 from time import gmtime, strftime
-import subprocess
 import sys
 import traceback
 import datetime
 
-from telethon.tl.functions.messages import GetPeerDialogsRequest
 
-from typing import List
 
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
@@ -403,7 +399,7 @@ def register(**args):
         bot.add_event_handler(func, events.NewMessage(**args))
         try:
             LOAD_PLUG[file_test].append(func)
-        except Exception as e:
+        except Exception:
             LOAD_PLUG.update({file_test: [func]})
 
         return func

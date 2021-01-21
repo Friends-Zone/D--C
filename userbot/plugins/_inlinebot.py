@@ -24,13 +24,12 @@ delete kr diya h _inline
 """
 
 
+# gtfo
 
-#gtfo
+# getlost
 
-#getlost
+# TEAM DC
 
-#TEAM DC
-
-#special plugin for Kangers..
+# special plugin for Kangers..
 
 # Bhaag bhosdike

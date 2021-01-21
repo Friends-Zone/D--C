@@ -1,9 +1,5 @@
-import os
-import re
-import urllib.request
-import PIL.ImageOps
 import requests
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 from validators.url import url
 
 async def moditweet(text):
