@@ -2,7 +2,7 @@ import os
 import random
 import re
 from math import ceil
-
+from var import Var
 from telethon import custom, events
 from telethon.tl.custom import Button
 
