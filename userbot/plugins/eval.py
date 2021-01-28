@@ -2,20 +2,21 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import io
-import sys
+from telethon import events, errors, functions, types
+import inspect
 import traceback
-
-from uniborg.util import admin_cmd
-
+import asyncio
+import sys
+import io
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply 
 from userbot import CMD_HELP
 
-
-@borg.on(admin_cmd("eval"))
+@bot.on(admin_cmd("eval"))
+@bot.on(sudo_cmd("eval", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    await event.edit("Processing ...")
+    await edit_or_reply(event, "Processing ...")
     cmd = event.text.split(" ", maxsplit=1)[1]
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
@@ -49,10 +50,10 @@ async def _(event):
 
     final_output = "**EVAL**: `{}` \n\n **OUTPUT**: \n`{}` \n".format(cmd, evaluation)
 
-    if len(final_output) > Config.MAX_MESSAGE_SIZE_LIMIT:
+    if len(final_output) > 7000:
         with io.BytesIO(str.encode(final_output)) as out_file:
             out_file.name = "eval.text"
-            await borg.send_file(
+            await bot.send_file(
                 event.chat_id,
                 out_file,
                 force_document=True,
@@ -62,7 +63,7 @@ async def _(event):
             )
             await event.delete()
     else:
-        await event.edit(final_output)
+        await edit_or_reply(event, final_output)
 
 
 async def aexec(code, event):
@@ -70,4 +71,10 @@ async def aexec(code, event):
     return await locals()["__aexec"](event)
 
 
-CMD_HELP.update({"eval": ".eval <code>" "\nUsage Run Your Python Codes using .eval"})
+CMD_HELP.update(
+    {
+        "eval": "**Eval**\
+\n\n**Syntax : **`.eval <python code>`\
+\n**Usage :** Run python code on telegram.."
+    }
+)
