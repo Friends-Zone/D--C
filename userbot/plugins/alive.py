@@ -8,7 +8,7 @@ import time
 from telethon import version
 
 from userbot import ALIVE_NAME, Lastupdate
-from userbot.utils import admin_cmd, sudo_cmd
+from userbot.utils import admin_cmd, sudo_cmd, CmdHelp
 
 from . import dcdef
 
@@ -72,3 +72,8 @@ async def hmm(yes):
 
     await asyncio.sleep(edit_time)
     ok7 = await borg.edit_message(yes.chat_id, ok6, file=file4)
+
+CmdHelp("alive").add_command(
+  'alive', None, 'Check weather the bot is alive or not'
+).set_file_info('NOOB', None
+).add()
