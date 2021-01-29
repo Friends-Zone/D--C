@@ -657,10 +657,10 @@ class CmdHelp:
         CMD_HELP[self.FILE] = self.get_result()
         return True
 
-    """def getText(self, text: str):
-        if text == "REPLY_OR_USERNAME":
-            return "<user name> <user name/answer >"
-        elif text == "OR":
-            return "or"
-        elif text == "USERNAMES":
-            return "<user name (s)>""""
+    #def getText(self, text: str):
+    #   if text == "REPLY_OR_USERNAME":
+    #       return "<user name> <user name/answer >"
+    #   elif text == "OR":
+    #       return "or"
+    #   elif text == "USERNAMES":
+    #       return "<user name (s)>""""
