@@ -19,6 +19,7 @@ else:
 Lastupdate = time.time()
 CMD_LIST = {}
 CMD_HELP = {}
+CMD_HELP_BOT = {}
 INT_PLUG = ""
 LOAD_PLUG = {}
 
@@ -185,5 +186,6 @@ COUNT_PM = {}
 LASTMSG = {}
 SUDO_LIST = {}
 CMD_HELP = {}
+CMD_HELP_BOT = {}
 ISAFK = False
 AFKREASON = None
