@@ -21,14 +21,14 @@ async def is_register_admin(chat, user):
 
         return isinstance(
             (await
-             tbot(functions.channels.GetParticipantRequest(chat,
+             tgbot(functions.channels.GetParticipantRequest(chat,
                                                            user))).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
 
-        ui = await tbot.get_peer_id(user)
-        ps = (await tbot(functions.messages.GetFullChatRequest(chat.chat_id)
+        ui = await tgbot.get_peer_id(user)
+        ps = (await tgbot(functions.messages.GetFullChatRequest(chat.chat_id)
                          )).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
@@ -37,7 +37,7 @@ async def is_register_admin(chat, user):
     return None
 
 
-@register(pattern=r"^/julia(?: |$)([\s\S]*)")
+@register(pattern=r"^/ques(?: |$)([\s\S]*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -60,7 +60,7 @@ async def _(event):
 
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
-        required_file_name = await tbot.download_media(
+        required_file_name = await tgbot.download_media(
             previous_message, TEMP_DOWNLOAD_DIRECTORY)
         if IBM_WATSON_CRED_URL is None or IBM_WATSON_CRED_PASSWORD is None:
             await event.reply(
@@ -105,7 +105,7 @@ async def _(event):
                     except gTTSError:
                         return
                     with open("results.mp3", "r"):
-                        await tbot.send_file(
+                        await tgbot.send_file(
                             event.chat_id,
                             "results.mp3",
                             voice_note=True,
@@ -127,7 +127,7 @@ async def _(event):
                     except gTTSError:
                         return
                     with open("results.mp3", "r"):
-                        await tbot.send_file(
+                        await tgbot.send_file(
                             event.chat_id,
                             "results.mp3",
                             voice_note=True,
@@ -140,7 +140,7 @@ async def _(event):
                 os.remove(required_file_name)
 
 
-@register(pattern="^/howdoi (.*)")
+@register(pattern="^/howto (.*)")
 async def howdoi(event):
     if event.fwd_from:
         return
@@ -163,11 +163,11 @@ file_helpo = file_help.replace("_", " ")
 
 __help__ = """
 **For text assistant**
- - /julia <question>: Ask julia any question and it will give accurate reply. For eg: `/julia where is Taj Mahal`, `/julia what is the age of Virat Kohli` etc..
+ - /ques <question>: Ask Assistant any question and it will give accurate reply. For eg: `/ques where is Taj Mahal`, `/ques what is the age of Virat Kohli` etc..
 **For voice assistant**
- - /julia: Reply to a voice query and get the results in voice output (ENGLISH ONLY)
+ - /ques: Reply to a voice query and get the results in voice output (ENGLISH ONLY)
 **Terminal Assistant**
- - /howdoi <question>: Get all coding related answers from Julia. Syntax: `/howdoi print hello world in python`
+ - /howto <question>: Get all coding related answers from Assistant. Syntax: `/howdoi print hello world in python`
 **NOTE**
 The question should be a meaningful one otherwise you will get no response !
 """
