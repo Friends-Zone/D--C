@@ -6,6 +6,7 @@ from gtts import gTTS
 from gtts import gTTSError
 from requests import get
 from telethon import *
+from telethon import events
 from telethon.tl import functions
 from telethon.tl import types
 from telethon.tl.types import *
