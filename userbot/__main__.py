@@ -62,7 +62,7 @@ else:
 
 try:
     async ok(eve):
-        bot.tgbot.send_message(bot.uid, "DARK COBRA userbot AND YOUR ASSISTANT is Active Enjoy Join @DarkCobra_Support For Updates.")
+        await bot.tgbot.send_message(bot.uid, "DARK COBRA userbot AND YOUR ASSISTANT is Active Enjoy Join @DarkCobra_Support For Updates.")
 except Exception as e:
     print(e)
 print("DARK COBRA userbot AND YOUR ASSISTANT is Active Enjoy Join @DarkCobra_Support For Updates.")
