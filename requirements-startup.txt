@@ -30,6 +30,7 @@ google_images_download>=2.8.0
 googletrans==3.1.0a0
 geopy
 gsearch
+howdoi
 hachoir
 heroku3
 httplib2
