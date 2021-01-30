@@ -60,6 +60,10 @@ if LOAD_ASSISTANT == True:
 else:
     print("Assitant is Not Loading As U Have Disabled")
 
+try:
+    bot.tgbot.send_message(bot.uid, "DARK COBRA userbot AND YOUR ASSISTANT is Active Enjoy Join @DarkCobra_Support For Updates.")
+except Exception as e:
+    print(e)
 print("DARK COBRA userbot AND YOUR ASSISTANT is Active Enjoy Join @DarkCobra_Support For Updates.")
 
 if len(argv) not in (1, 3, 4):
