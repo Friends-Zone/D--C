@@ -23,15 +23,15 @@ if TG_BOT_USER_NAME_BF_HER is not None:
         if query.startswith("dcmod") and event.query.user_id == me.id:
             buttons = [
                 [
-                    Button.url("Repo", "https://github.com/The-Terminal/DARKCOBRA"),
+                    Button.url("Repo", "https://github.com/ProgrammingError/D--C"),
                     Button.url(
                         "Deploy",
-                        "https://heroku.com/deploy?template=https://github.com/The-Terminal/DARKCOBRA/blob/master",
+                        "https://heroku.com/deploy?template=https://github.com/ProgrammingError/D--C/blob/master",
                     ),
                 ],
                 [
                     Button.url("String", "https://repl.it/@Danish00/DarkCobra#main.py"),
-                    Button.url("Channel", "https://t.me/fryplugins"),
+                    Button.url("Channel", "https://t.me/moi_plugs"),
                 ],
             ]
             if ALIVE_PHOTTO and ALIVE_PHOTTO.endswith((".jpg", ".png")):
