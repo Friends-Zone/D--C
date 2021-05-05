@@ -1,4 +1,6 @@
 import os
+import asyncio
+
 from pathlib import Path
 from sys import argv
 
@@ -61,10 +63,13 @@ else:
     print("Assitant is Not Loading As U Have Disabled")
 
 try:
-    bot.tgbot.send_message(bot.uid, "DARK COBRA userbot AND YOUR ASSISTANT is Active Enjoy Join @DarkCobra_Support For Updates.")
+    async def omk():
+        await bot.tgbot.send_message(bot.uid, "DARK COBRA userbot AND YOUR ASSISTANT is Active. Enjoy!")
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(omk())
 except Exception as e:
     print(e)
-print("DARK COBRA userbot AND YOUR ASSISTANT is Active Enjoy Join @DarkCobra_Support For Updates.")
+print("DARK COBRA userbot AND YOUR ASSISTANT is Active. Enjoy!")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
