@@ -2,6 +2,7 @@ import os
 
 from telethon import Button, events
 from telethon.tl.custom import Button
+from telethon import __version__ as t_v
 
 from userbot import ALIVE_NAME
 from userbot import bot as borg
@@ -19,7 +20,7 @@ if TG_BOT_USER_NAME_BF_HER is not None:
         query = event.text
         me = await borg.get_me()
         ghanti = me.id
-        dc_text = f"** 𝙳𝙰𝚁𝙺 𝙲𝙾𝙱𝚁𝙰 MOD 𝙸𝚂 𝙾𝙽𝙻𝙸𝙽𝙴**\n\n**Yes Master, Am Alive And Systems Are Working Perfectly As It Should Be...**\n\n✘ About My System ✘\n\n➾ **ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀꜱɪᴏɴ** ☞ 1.17.5\n➾ **ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ** ☞ [ᴊᴏɪɴ](https://t.me/Dark_cobra_support)\n➾ **ʟɪᴄᴇɴꜱᴇ**  ☞ [The Terminal](https://github.com/The-Terminal)\n➾ **ᴄᴏᴘʏʀɪɢʜᴛ ʙʏ** ☞ [The-Terminal](https://github.com/The-Terminal/DARKCOBRA)\n\n➾ **ᴍʏ ᴍᴀsᴛᴇʀ** ☞ [{DEFAULTUSER}](tg://user?id={ghanti})\n"
+        dc_text = f"** 𝙳𝙰𝚁𝙺 𝙲𝙾𝙱𝚁𝙰 MOD 𝙸𝚂 𝙾𝙽𝙻𝙸𝙽𝙴**\n\n**Yes Master, Am Alive And Systems Are Working Perfectly As It Should Be...**\n\n✘ About My System ✘\n\n➾ **ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀꜱɪᴏɴ** ☞ {t_v}\n➾ **ꜱᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ** ☞ [ᴊᴏɪɴ](https://t.me/Dark_cobra_support)\n➾ **ʟɪᴄᴇɴꜱᴇ**  ☞ [Error](https://github.com/ProgrammingError)\n➾ **ᴄᴏᴘʏʀɪɢʜᴛ ʙʏ** ☞ [Error](https://github.com/ProgrammingError/D--C)\n\n➾ **ᴍʏ ᴍᴀsᴛᴇʀ** ☞ [{DEFAULTUSER}](tg://user?id={ghanti})\n"
         if query.startswith("dcmod") and event.query.user_id == me.id:
             buttons = [
                 [
