@@ -48,6 +48,7 @@ if TG_BOT_USER_NAME_BF_HER is not None:
                     title="DC Mod",
                     text=dc_text,
                     buttons=buttons,
+                    include_media=True
                 )
             else:
                 result = builder.article(
