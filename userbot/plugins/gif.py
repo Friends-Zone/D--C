@@ -33,7 +33,7 @@ async def vtog(event):
     file_name = "dc.gif"
     clip = m.VideoFileClip(lol).subclip((4.3), (5.8)).resize(0.3)
     clip.write_gif(file_name)
-    hehe = path + "/" + file_name
+    hehe = f"{path}/{file_name}"
     await borg.send_file(event.chat_id, file_name)
     for files in (hehe, lol):
         if files and os.path.exists(files):

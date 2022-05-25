@@ -25,8 +25,7 @@ TYPE_DOCUMENT = 2
 @borg.on(events.NewMessage(pattern=r"\#(\S+)", outgoing=True))
 async def on_snip(event):
     name = event.pattern_match.group(1)
-    snip = get_snips(name)
-    if snip:
+    if snip := get_snips(name):
         if snip.snip_type == TYPE_PHOTO:
             media = types.InputPhoto(
                 int(snip.media_id),
@@ -41,9 +40,7 @@ async def on_snip(event):
             )
         else:
             media = None
-        message_id = event.message.id
-        if event.reply_to_msg_id:
-            message_id = event.reply_to_msg_id
+        message_id = event.reply_to_msg_id or event.message.id
         await borg.send_message(
             event.chat_id, snip.reply, reply_to=message_id, file=media
         )
@@ -112,4 +109,4 @@ async def on_snip_list(event):
 async def on_snip_delete(event):
     name = event.pattern_match.group(1)
     remove_snip(name)
-    await event.edit("snip #{} deleted successfully".format(name))
+    await event.edit(f"snip #{name} deleted successfully")

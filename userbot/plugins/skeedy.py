@@ -31,7 +31,7 @@ async def _(event):
             await conv.get_response()
             await conv.send_message("Asia/Kolkata")
             await conv.get_response()
-            await conv.send_message("➕Add" + input_str)
+            await conv.send_message(f"➕Add{input_str}")
             await conv.get_response()
             audio = await conv.get_response()
             await borg.send_message(event.chat_id, audio.text)

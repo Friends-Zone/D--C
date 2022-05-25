@@ -35,7 +35,7 @@ if 1 == 1:
 
             photos = await event.client.get_profile_photos(chat)
 
-        if id.strip() == "":
+        if not id.strip():
 
             try:
 
@@ -65,7 +65,7 @@ if 1 == 1:
 
                 return
 
-            if int(id) <= (len(photos)):
+            if id <= (len(photos)):
 
                 send_photos = await event.client.download_media(photos[id - 1])
 

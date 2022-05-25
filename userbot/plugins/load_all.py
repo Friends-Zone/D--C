@@ -17,7 +17,7 @@ async def install(event):
         event.chat_id, None, search=".py", filter=InputMessagesFilterDocument
     )
     total = int(documentss.total)
-    total_doxx = range(0, total)
+    total_doxx = range(total)
     b = await event.client.send_message(
         event.chat_id,
         f"**Installing {total} plugins...**\n`This msg will be deleted after the installation gets completed`",

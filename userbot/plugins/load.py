@@ -22,10 +22,6 @@ async def _(event):
 
         return
 
-    animation_interval = 0.1
-
-    animation_ttl = range(0, 100)
-
     input_str = event.pattern_match.group(1)
 
     if input_str == "load":
@@ -33,6 +29,10 @@ async def _(event):
         await event.edit(input_str)
 
         animation_chars = ["▮", "▯", "▬", "▭" "‎"]
+
+        animation_interval = 0.1
+
+        animation_ttl = range(100)
 
         for i in animation_ttl:
 
@@ -65,10 +65,6 @@ async def _(event):
 
         return
 
-    animation_interval = 0.1
-
-    animation_ttl = range(0, 100)
-
     input_str = event.pattern_match.group(1)
 
     if input_str == "square":
@@ -76,6 +72,10 @@ async def _(event):
         await event.edit(input_str)
 
         animation_chars = ["◧", "◨", "◧", "◨" "‎"]
+
+        animation_interval = 0.1
+
+        animation_ttl = range(100)
 
         for i in animation_ttl:
 
@@ -90,10 +90,6 @@ async def _(event):
     if event.fwd_from:
 
         return
-
-    animation_interval = 0.1
-
-    animation_ttl = range(0, 100)
 
     input_str = event.pattern_match.group(1)
 
@@ -103,6 +99,10 @@ async def _(event):
 
         animation_chars = ["╹", "╻", "╹", "╻" "‎"]
 
+        animation_interval = 0.1
+
+        animation_ttl = range(100)
+
         for i in animation_ttl:
 
             await asyncio.sleep(animation_interval)
@@ -116,10 +116,6 @@ async def _(event):
     if event.fwd_from:
 
         return
-
-    animation_interval = 0.1
-
-    animation_ttl = range(0, 100)
 
     input_str = event.pattern_match.group(1)
 
@@ -129,6 +125,10 @@ async def _(event):
 
         animation_chars = ["⚫", "⬤", "●", "∘" "‎"]
 
+        animation_interval = 0.1
+
+        animation_ttl = range(100)
+
         for i in animation_ttl:
 
             await asyncio.sleep(animation_interval)
@@ -142,10 +142,6 @@ async def _(event):
     if event.fwd_from:
 
         return
-
-    animation_interval = 0.1
-
-    animation_ttl = range(0, 100)
 
     input_str = event.pattern_match.group(1)
 
@@ -155,6 +151,10 @@ async def _(event):
 
         animation_chars = ["🖤", "❤️", "🖤", "❤️" "‎"]
 
+        animation_interval = 0.1
+
+        animation_ttl = range(100)
+
         for i in animation_ttl:
 
             await asyncio.sleep(animation_interval)
@@ -168,10 +168,6 @@ async def _(event):
     if event.fwd_from:
 
         return
-
-    animation_interval = 1
-
-    animation_ttl = range(0, 11)
 
     input_str = event.pattern_match.group(1)
 
@@ -193,6 +189,10 @@ async def _(event):
             "__**RePe GeNg Is BeHiNd You....**__",
         ]
 
+        animation_interval = 1
+
+        animation_ttl = range(11)
+
         for i in animation_ttl:
 
             await asyncio.sleep(animation_interval)
@@ -206,10 +206,6 @@ async def _(event):
     if event.fwd_from:
 
         return
-
-    animation_interval = 2
-
-    animation_ttl = range(0, 6)
 
     input_str = event.pattern_match.group(1)
 
@@ -225,6 +221,10 @@ async def _(event):
             "‎😁",
             "**Fair & Lovely GeNg Is BeHiNd You....**",
         ]
+
+        animation_interval = 2
+
+        animation_ttl = range(6)
 
         for i in animation_ttl:
 

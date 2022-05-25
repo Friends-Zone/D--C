@@ -11,7 +11,7 @@ async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    url = "https://ifsc.razorpay.com/{}".format(input_str)
+    url = f"https://ifsc.razorpay.com/{input_str}"
     r = requests.get(url)
     if r.status_code == 200:
         b = r.json()
@@ -19,4 +19,4 @@ async def _(event):
         # https://stackoverflow.com/a/9105132/4723940
         await event.edit(str(a))
     else:
-        await event.edit("`{}`: {}".format(input_str, r.text))
+        await event.edit(f"`{input_str}`: {r.text}")

@@ -72,8 +72,7 @@ async def _(event):
     elif input_cmd == "unban":
         rights = UNBAN_RIGHTS
     input_str = event.pattern_match.group(2)
-    reply_msg_id = event.reply_to_msg_id
-    if reply_msg_id:
+    if reply_msg_id := event.reply_to_msg_id:
         r_mesg = await event.get_reply_message()
         to_ban_id = r_mesg.sender_id
     elif input_str and "all" not in input_str:
@@ -96,8 +95,7 @@ async def _(event):
         i = 1
         msgs = []
         from_user = None
-        input_str = event.pattern_match.group(1)
-        if input_str:
+        if input_str := event.pattern_match.group(1):
             from_user = await borg.get_entity(input_str)
             logger.info(from_user)
         async for message in borg.iter_messages(
@@ -131,8 +129,7 @@ async def _(event):
     elif input_cmd == "unban":
         rights = UNBAN_RIGHTS
     input_str = event.pattern_match.group(2)
-    reply_msg_id = event.reply_to_msg_id
-    if reply_msg_id:
+    if reply_msg_id := event.reply_to_msg_id:
         r_mesg = await event.get_reply_message()
         to_ban_id = r_mesg.sender_id
     elif input_str and "all" not in input_str:

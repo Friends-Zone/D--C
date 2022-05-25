@@ -15,11 +15,11 @@ async def _(event):
 
     country_data = get_country_data(country, data)
 
-    output_text = ""
+    output_text = "".join(
+        "`{}`: `{}`\n".format(str(name), str(value))
+        for name, value in country_data.items()
+    )
 
-    for name, value in country_data.items():
-
-        output_text += "`{}`: `{}`\n".format(str(name), str(value))
 
     await event.edit(
         "**CoronaVirus Info in {}**:\n\n{}".format(country.capitalize(), output_text)
@@ -28,13 +28,14 @@ async def _(event):
 
 def get_country_data(country, world):
 
-    for country_data in world:
-
-        if country_data["country"].lower() == country.lower():
-
-            return country_data
-
-    return {"Status": "No information yet about this country!"}
+    return next(
+        (
+            country_data
+            for country_data in world
+            if country_data["country"].lower() == country.lower()
+        ),
+        {"Status": "No information yet about this country!"},
+    )
 
 
 CMD_HELP.update({"corona": ".corona (country name)"})

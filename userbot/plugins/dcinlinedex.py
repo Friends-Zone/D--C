@@ -28,10 +28,7 @@ async def inline_id_handler(event: events.InlineQuery.Event):
         weight = a["weight"]
         esatge = r.json()["family"]["evolutionStage"]
         l = r.json()["family"]["evolutionLine"]
-        if not l:
-            line = "None"
-        else:
-            line = ", ".join(map(str, l))
+        line = ", ".join(map(str, l)) if l else "None"
         gen = a["generation"]
         try:
             move1 = move.json()["moves"][0]["move"]["name"]
@@ -106,7 +103,7 @@ async def inline_id_handler(event: events.InlineQuery.Event):
             ],
         )
         await event.answer([result])
-    if not event.query.user_id == bot.uid:
+    if event.query.user_id != bot.uid:
         resultm = builder.article(
             title="me not your bot",
             description="Mind Your Business",
@@ -146,7 +143,7 @@ async def inline_id_handler(event: events.InlineQuery.Event):
             ],
         )
         await event.answer([result])
-    if not event.query.user_id == bot.uid:
+    if event.query.user_id != bot.uid:
         resultm = builder.article(
             title="me not your bot",
             description="Mind Your Business",

@@ -73,7 +73,7 @@ async def _(event):
         deq.rotate(1)
 
 
-@borg.on(admin_cmd(pattern=f"earth$", outgoing=True))
+@borg.on(admin_cmd(pattern="earth$", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -111,7 +111,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 1
-    animation_ttl = range(0, 14)
+    animation_ttl = range(14)
     await event.edit("brain")
     animation_chars = [
         "YOᑌᖇ ᗷᖇᗩIᑎ ➡️ 🧠\n\n🧠         <(^_^ <)🗑",
@@ -135,7 +135,7 @@ async def _(event):
         await event.edit(animation_chars[i % 14])
 
 
-@borg.on(admin_cmd(pattern=f"bomb$", outgoing=True))
+@borg.on(admin_cmd(pattern="bomb$", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -161,12 +161,12 @@ async def _(event):
     await asyncio.sleep(2)
 
 
-@borg.on(admin_cmd(pattern=f"kill$", outgoing=True))
+@borg.on(admin_cmd(pattern="kill$", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.5
-    animation_ttl = range(0, 12)
+    animation_ttl = range(12)
     await event.edit("ready to die dude.....")
     animation_chars = [
         "Ｆｉｉｉｉｉｒｅ",
@@ -192,7 +192,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.5
-    animation_ttl = range(0, 5)
+    animation_ttl = range(5)
     await event.edit("wtf")
     animation_chars = ["What", "What The", "What The F", "What The F Brah"]
     for i in animation_ttl:
@@ -204,7 +204,7 @@ async def _(event):
 @borg.on(admin_cmd(pattern="ding$"))
 async def _(event):
     animation_interval = 0.3
-    animation_ttl = range(0, 30)
+    animation_ttl = range(30)
     animation_chars = [
         "🔴⬛⬛⬜⬜\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
         "⬜⬜⬛⬜⬜\n⬜⬛⬜⬜⬜\n🔴⬜⬜⬜⬜",
@@ -225,12 +225,12 @@ async def _(event):
         await event.edit(animation_chars[i % 10])
 
 
-@borg.on(admin_cmd(pattern=f"hypnotize$", outgoing=True))
+@borg.on(admin_cmd(pattern="hypnotize$", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.3
-    animation_ttl = range(0, 15)
+    animation_ttl = range(15)
     await event.edit("hypnotizing....")
     animation_chars = [
         "⬜⬜⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜⬜⬜",

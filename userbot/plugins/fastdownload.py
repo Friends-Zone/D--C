@@ -63,7 +63,7 @@ async def magnet_download(event):
             # print(str(e))
             pass
 
-    await event.edit("**File Downloaded Successfully:** `{}`".format(file.name))
+    await event.edit(f"**File Downloaded Successfully:** `{file.name}`")
 
 
 async def progress_status(gid, event, previous):
@@ -91,12 +91,12 @@ async def progress_status(gid, event, previous):
                     previous = msg
             else:
                 logger.info(str(file.error_message))
-                await event.edit("Error : `{}`".format(str(file.error_message)))
+                await event.edit(f"Error : `{str(file.error_message)}`")
                 return
             await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
             await progress_status(gid, event, previous)
         else:
-            await event.edit("File Downloaded Successfully: `{}`".format(file.name))
+            await event.edit(f"File Downloaded Successfully: `{file.name}`")
             return
     except Exception as e:
         if " not found" in str(e) or "'file'" in str(e):
@@ -118,5 +118,5 @@ async def progress_status(gid, event, previous):
 async def check_metadata(gid):
     file = aria2.get_download(gid)
     new_gid = file.followed_by_ids[0]
-    logger.info("Changing GID " + gid + " to " + new_gid)
+    logger.info(f"Changing GID {gid} to {new_gid}")
     return new_gid

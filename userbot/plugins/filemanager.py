@@ -64,9 +64,7 @@ async def _(event):
     PROCESS_RUN_TIME = 100
     cmd = "ls -lh"
 
-    reply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        reply_to_id = event.reply_to_msg_id
+    reply_to_id = event.reply_to_msg_id or event.message.id
     time.time() + PROCESS_RUN_TIME
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
@@ -98,9 +96,7 @@ async def _(event):
     PROCESS_RUN_TIME = 100
     cmd = "ls ./SAVED/"
 
-    reply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        reply_to_id = event.reply_to_msg_id
+    reply_to_id = event.reply_to_msg_id or event.message.id
     time.time() + PROCESS_RUN_TIME
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
@@ -136,16 +132,14 @@ async def _(event):
         src = src.strip()
         dst = dst.strip()
     cmd = f"mv ./SAVED/{src} ./SAVED/{dst}"
-    reply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        reply_to_id = event.reply_to_msg_id
+    reply_to_id = event.reply_to_msg_id or event.message.id
     time.time() + PROCESS_RUN_TIME
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
-    OUTPUT = f"**Files in root directory:**\n"
     stdout, stderr = await process.communicate()
     if len(stdout) > Config.MAX_MESSAGE_SIZE_LIMIT:
+        OUTPUT = f"**Files in root directory:**\n"
         with io.BytesIO(str.encode(stdout)) as out_file:
             out_file.name = "exec.text"
             await borg.send_file(
@@ -174,16 +168,14 @@ async def _(event):
         src = src.strip()
         dst = dst.strip()
     cmd = f"mv ./DOWNLOADS/{src} ./DOWNLOADS/{dst}"
-    reply_to_id = event.message.id
-    if event.reply_to_msg_id:
-        reply_to_id = event.reply_to_msg_id
+    reply_to_id = event.reply_to_msg_id or event.message.id
     time.time() + PROCESS_RUN_TIME
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
-    OUTPUT = f"**Files in root directory:**\n"
     stdout, stderr = await process.communicate()
     if len(stdout) > Config.MAX_MESSAGE_SIZE_LIMIT:
+        OUTPUT = f"**Files in root directory:**\n"
         with io.BytesIO(str.encode(stdout)) as out_file:
             out_file.name = "exec.text"
             await borg.send_file(

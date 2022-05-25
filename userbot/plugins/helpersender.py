@@ -16,7 +16,7 @@ async def send(event):
         return
     message_id = event.message.id
     input_str = event.pattern_match["shortname"]
-    the_plugin_file = "./userbot/helper//{}.py".format(input_str)
+    the_plugin_file = f"./userbot/helper//{input_str}.py"
     start = datetime.now()
     await event.client.send_file(  # pylint:disable=E0602
         event.chat_id,
@@ -27,7 +27,7 @@ async def send(event):
     )
     end = datetime.now()
     time_taken_in_ms = (end - start).seconds
-    await event.edit("Uploaded {} in {} seconds".format(input_str, time_taken_in_ms))
+    await event.edit(f"Uploaded {input_str} in {time_taken_in_ms} seconds")
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
 

@@ -35,18 +35,19 @@ async def labstack(event):
     )
     r2json = json.loads(r2.text)
 
-    url = "https://up.labstack.com/api/v1/links/{}/send".format(r2json["code"])
+    url = f'https://up.labstack.com/api/v1/links/{r2json["code"]}/send'
     max_days = 7
     command_to_exec = [
         "curl",
         "-F",
-        "files=@" + filebase,
+        f"files=@{filebase}",
         "-H",
         "Transfer-Encoding: chunked",
         "-H",
         "Up-User-ID: IZfFbjUcgoo3Ao3m",
         url,
     ]
+
     try:
         logger.info(command_to_exec)
         t_response = subprocess.check_output(command_to_exec, stderr=subprocess.STDOUT)
@@ -56,9 +57,10 @@ async def labstack(event):
         return
     else:
         logger.info(t_response)
-        t_response_arry = "https://up.labstack.com/api/v1/links/{}/receive".format(
-            r2json["code"]
+        t_response_arry = (
+            f'https://up.labstack.com/api/v1/links/{r2json["code"]}/receive'
         )
+
     await event.edit(
         t_response_arry + "\nMax Days:" + str(max_days), link_preview=False
     )

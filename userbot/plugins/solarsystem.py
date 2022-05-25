@@ -8,7 +8,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 549755813888)
+    animation_ttl = range(549755813888)
 
     await event.edit("Solar")
     animation_chars = [

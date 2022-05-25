@@ -30,7 +30,7 @@ async def _(event):
     input_str = event.pattern_match.group(
         1
     )  # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
-    input_url = "https://bots.shrimadhavuk.me/search/?q={}".format(input_str)
+    input_url = f"https://bots.shrimadhavuk.me/search/?q={input_str}"
     headers = {"USER-AGENT": "UniBorg"}
     response = requests.get(input_url, headers=headers).json()
     output_str = " "
@@ -57,17 +57,17 @@ async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
-    BASE_URL = "http://www.google.com"
     OUTPUT_STR = "Reply to an image to do Google Reverse Search"
     if event.reply_to_msg_id:
         await event.edit("Pre Processing Media")
         previous_message = await event.get_reply_message()
         previous_message_text = previous_message.message
+        BASE_URL = "http://www.google.com"
         if previous_message.media:
             downloaded_file_name = await borg.download_media(
                 previous_message, Config.TMP_DOWNLOAD_DIRECTORY
             )
-            SEARCH_URL = "{}/searchbyimage/upload".format(BASE_URL)
+            SEARCH_URL = f"{BASE_URL}/searchbyimage/upload"
             multipart = {
                 "encoded_image": (
                     downloaded_file_name,

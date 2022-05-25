@@ -111,7 +111,7 @@ async def _(event):
         )
         input_str = event.pattern_match.group(1)
         adress = input_str
-        api = "http://ip-api.com/json/" + adress
+        api = f"http://ip-api.com/json/{adress}"
         result = urllib.request.urlopen(api).read()
         result = result.decode()
         result = json.loads(result)

@@ -31,9 +31,7 @@ async def ff_mpeg_trim_cmd(event):
             else:
                 end = datetime.now()
                 ms = (end - start).seconds
-                await event.edit(
-                    "Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms)
-                )
+                await event.edit(f"Downloaded to `{downloaded_file_name}` in {ms} seconds.")
         else:
             await event.edit("Reply to a Telegram media file")
     else:
@@ -113,7 +111,7 @@ async def ff_mpeg_trim_cmd(event):
 
 async def take_screen_shot(video_file, output_directory, ttl):
     # https://stackoverflow.com/a/13891070/4723940
-    out_put_file_name = output_directory + "/" + str(time.time()) + ".jpg"
+    out_put_file_name = f"{output_directory}/{str(time.time())}.jpg"
     file_genertor_command = [
         "ffmpeg",
         "-ss",
@@ -137,10 +135,9 @@ async def take_screen_shot(video_file, output_directory, ttl):
     t_response = stdout.decode().strip()
     if os.path.lexists(out_put_file_name):
         return out_put_file_name
-    else:
-        logger.info(e_response)
-        logger.info(t_response)
-        return None
+    logger.info(e_response)
+    logger.info(t_response)
+    return None
 
 
 # https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
@@ -148,7 +145,7 @@ async def take_screen_shot(video_file, output_directory, ttl):
 
 async def cult_small_video(video_file, output_directory, start_time, end_time):
     # https://stackoverflow.com/a/13891070/4723940
-    out_put_file_name = output_directory + "/" + str(round(time.time())) + ".mp4"
+    out_put_file_name = f"{output_directory}/{str(round(time.time()))}.mp4"
     file_genertor_command = [
         "ffmpeg",
         "-i",
@@ -175,7 +172,6 @@ async def cult_small_video(video_file, output_directory, start_time, end_time):
     t_response = stdout.decode().strip()
     if os.path.lexists(out_put_file_name):
         return out_put_file_name
-    else:
-        logger.info(e_response)
-        logger.info(t_response)
-        return None
+    logger.info(e_response)
+    logger.info(t_response)
+    return None

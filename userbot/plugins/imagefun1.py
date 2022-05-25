@@ -61,7 +61,7 @@ async def hmm(event):
         return
     reply = await event.get_reply_message()
     await event.edit("```Processing```")
-    os.system(f"wget https://telegra.ph/file/b3a6038bc825cc4edc4f0.png")
+    os.system("wget https://telegra.ph/file/b3a6038bc825cc4edc4f0.png")
     img = await bot.download_media(reply.media, path)
     mon = "b3a6038bc825cc4edc4f0.png"
     foreground = Image.open(mon).convert("RGBA")
@@ -161,7 +161,7 @@ async def hehe(event):
     # api for adding color only....
 
 
-DARKCOBRA = Config.DEEP_AI if Config.DEEP_AI else "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
+DARKCOBRA = Config.DEEP_AI or "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
 
 
 @borg.on(admin_cmd(pattern="color$", outgoing=True))

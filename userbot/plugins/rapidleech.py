@@ -73,8 +73,8 @@ async def get_direct_ip_specific_link(link: str):
                     regex_search_exp = re.search(
                         '= (?P<url>".+" \+ (?P<math>\(.+\)) .+);', script.text
                     )
-                    url_raw = regex_search_exp.group("url")
-                    math = regex_search_exp.group("math")
+                    url_raw = regex_search_exp["url"]
+                    math = regex_search_exp["math"]
                     dl_url = url_raw.replace(math, '"' + str(eval(math)) + '"')
                     break
             #
@@ -83,10 +83,9 @@ async def get_direct_ip_specific_link(link: str):
     elif re.search(OPEN_LOAD_VALID_URL, link):
         # https://stackoverflow.com/a/47726003/4723940
         async with aiohttp.ClientSession() as session:
-            openload_id = re.search(OPEN_LOAD_VALID_URL, link).group("id")
-            step_one_url = "https://api.openload.co/1/file/dlticket?file={}&login={}&key={}".format(
-                openload_id, Config.OPEN_LOAD_LOGIN, Config.OPEN_LOAD_KEY
-            )
+            openload_id = re.search(OPEN_LOAD_VALID_URL, link)["id"]
+            step_one_url = f"https://api.openload.co/1/file/dlticket?file={openload_id}&login={Config.OPEN_LOAD_LOGIN}&key={Config.OPEN_LOAD_KEY}"
+
             http_response = await session.get(step_one_url)
             http_response_text = await http_response.text()
             http_response_json = json.loads(http_response_text)
@@ -95,11 +94,8 @@ async def get_direct_ip_specific_link(link: str):
                 # wait till wait time
                 await asyncio.sleep(int(http_response_json["result"]["wait_time"]))
                 # TODO: check if captcha is required
-                step_two_url = (
-                    "https://api.openload.co/1/file/dl?file={}&ticket={}".format(
-                        openload_id, http_response_json["result"]["ticket"]
-                    )
-                )
+                step_two_url = f'https://api.openload.co/1/file/dl?file={openload_id}&ticket={http_response_json["result"]["ticket"]}'
+
                 http_response = await session.get(step_two_url)
                 http_response_text = await http_response.text()
                 http_response_json = json.loads(http_response_text)
@@ -117,13 +113,11 @@ async def get_direct_ip_specific_link(link: str):
                     dl_url = {"err": http_response_text}
             else:
                 dl_url = {"err": http_response_text}
-        # https://stackoverflow.com/a/47726003/4723940
+            # https://stackoverflow.com/a/47726003/4723940
     elif re.search(GOOGLE_DRIVE_VALID_URLS, link):
-        file_id = re.search(GOOGLE_DRIVE_VALID_URLS, link).group("id")
+        file_id = re.search(GOOGLE_DRIVE_VALID_URLS, link)["id"]
         async with aiohttp.ClientSession(cookie_jar=aiohttp.CookieJar()) as session:
-            step_zero_url = "https://drive.google.com/uc?export=download&id={}".format(
-                file_id
-            )
+            step_zero_url = f"https://drive.google.com/uc?export=download&id={file_id}"
             http_response = await session.get(step_zero_url, allow_redirects=False)
             if "location" in http_response.headers:
                 # in case of small file size, Google downloads directly

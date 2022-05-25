@@ -37,9 +37,10 @@ async def _(event):
         "-X",
         "POST",
         "-F",
-        "f=@" + downloaded_file_name + "",
+        f"f=@{downloaded_file_name}",
         "https://zxing.org/w/decode",
     ]
+
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,
         # stdout must a pipe to be accessible as process.stdout
@@ -89,9 +90,7 @@ async def _(event):
             m_list = None
             with open(downloaded_file_name, "rb") as fd:
                 m_list = fd.readlines()
-            message = ""
-            for m in m_list:
-                message += m.decode("UTF-8") + "\r\n"
+            message = "".join(m.decode("UTF-8") + "\r\n" for m in m_list)
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -117,6 +116,6 @@ async def _(event):
     os.remove("img_file.webp")
     end = datetime.now()
     ms = (end - start).seconds
-    await event.edit("Created QRCode in {} seconds".format(ms))
+    await event.edit(f"Created QRCode in {ms} seconds")
     await asyncio.sleep(5)
     await event.delete()

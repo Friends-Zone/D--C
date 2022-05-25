@@ -18,7 +18,7 @@ from userbot import bot as borg
 async def get_full_user(event):  
     args = event.pattern_match.group(1).split(':', 1)
     extra = None
-    if event.reply_to_msg_id and not len(args) == 2:
+    if event.reply_to_msg_id and len(args) != 2:
         previous_message = await event.get_reply_message()
         user_obj = await event.client.get_entity(previous_message.sender_id)
         extra = event.pattern_match.group(1)
@@ -41,7 +41,7 @@ async def get_full_user(event):
         try:
             user_obj = await event.client.get_entity(user)
         except Exception as err:
-            return await event.edit("Error... Please report at @Dark_cobra_support_group", str(err))           
+            return await event.edit("Error... Please report at @Dark_cobra_support_group", str(err))
     return user_obj, extra
 
 #made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam#made by @danish_00 with sh1vam
@@ -64,7 +64,7 @@ async def gben(userbot):
     sender = await dc.get_sender()
     me = await userbot.client.get_me()
     await dark.edit("`promoting...`")
-    my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
+    my_mention = f"[{me.first_name}](tg://user?id={me.id})"
     f"@{me.username}" if me.username else my_mention
     await userbot.get_chat()
     if userbot.is_private:
@@ -83,7 +83,7 @@ async def gben(userbot):
         if not rank:
             rank = "ㅤㅤ"
     except:
-        return await dark.edit(f"**Something W3NT Wrong 🤔**")
+        return await dark.edit("**Something W3NT Wrong 🤔**")
     if user:
         telchanel = [d.entity.id
                      for d in await userbot.client.get_dialogs()
@@ -103,7 +103,7 @@ async def gben(userbot):
           except:
              pass
     else:
-        await dark.edit(f"**Reply to a user you dumbo !!**")
+        await dark.edit("**Reply to a user you dumbo !!**")
     return await dark.edit(
         f"**Globally promoted [{user.first_name}](tg://user?id={user.id})\n On Chats😏 : {i} **"
     )
@@ -114,7 +114,7 @@ async def gben(userbot):
     sender = await dc.get_sender()
     me = await userbot.client.get_me()
     await dark.edit("`demoting...`")
-    my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
+    my_mention = f"[{me.first_name}](tg://user?id={me.id})"
     f"@{me.username}" if me.username else my_mention
     await userbot.get_chat()
     if userbot.is_private:
@@ -133,7 +133,7 @@ async def gben(userbot):
         if not rank:
             rank = "ㅤㅤ"
     except:
-        return await dark.edit(f"**Something W3NT Wrong 🤔**")
+        return await dark.edit("**Something W3NT Wrong 🤔**")
     if user:
         telchanel = [d.entity.id
                      for d in await userbot.client.get_dialogs()
@@ -153,7 +153,7 @@ async def gben(userbot):
           except:
              pass
     else:
-        await dark.edit(f"**Reply to a user you dumbo !!**")
+        await dark.edit("**Reply to a user you dumbo !!**")
     return await dark.edit(
         f"**Globally Demoted [{user.first_name}](tg://user?id={user.id})\n On Chats😏 : {i} **"
     )

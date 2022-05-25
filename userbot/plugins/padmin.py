@@ -19,7 +19,7 @@ async def _(event):
 
     animation_interval = 1
 
-    animation_ttl = range(0, 20)
+    animation_ttl = range(20)
 
     await event.edit("Promoting")
 

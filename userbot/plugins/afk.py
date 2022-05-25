@@ -146,10 +146,10 @@ async def _(event):
     afk_time = None
     last_afk_message = {}
     afk_end = {}
-    start_1 = datetime.now()
-    afk_start = start_1.replace(microsecond=0)
-    reason = event.pattern_match.group(1)
     if not USER_AFK:  # pylint:disable=E0602
+        start_1 = datetime.now()
+        afk_start = start_1.replace(microsecond=0)
+        reason = event.pattern_match.group(1)
         last_seen_status = await borg(  # pylint:disable=E0602
             functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
         )
@@ -161,7 +161,7 @@ async def _(event):
                 event.chat_id, f"**I shall be Going afk!**\n __Reason >>> {reason}__"
             )
         else:
-            await borg.send_message(event.chat_id, f"**I am Going afk!**")
+            await borg.send_message(event.chat_id, "**I am Going afk!**")
         await asyncio.sleep(2)
         await event.delete()
         try:

@@ -21,9 +21,8 @@ import datetime
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
     from userbot.uniborgConfig import Config
-else:
-    if os.path.exists("config.py"):
-        from config import Development as Config
+elif os.path.exists("config.py"):
+    from config import Development as Config
 
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
@@ -105,18 +104,18 @@ def load_module(shortname):
         import importlib
         from pathlib import Path
         path = Path(f"userbot/plugins/{shortname}.py")
-        name = "userbot.plugins.{}".format(shortname)
+        name = f"userbot.plugins.{shortname}"
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-        print("Successfully (re)imported "+shortname)
+        print(f"Successfully (re)imported {shortname}")
     else:
         import userbot.utils
         import sys
         import importlib
         from pathlib import Path
         path = Path(f"userbot/plugins/{shortname}.py")
-        name = "userbot.plugins.{}".format(shortname)
+        name = f"userbot.plugins.{shortname}"
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         mod.bot = bot
@@ -132,8 +131,8 @@ def load_module(shortname):
         sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
         # for imports
-        sys.modules["userbot.plugins."+shortname] = mod
-        print("Successfully (re)imported "+shortname)
+        sys.modules[f"userbot.plugins.{shortname}"] = mod
+        print(f"Successfully (re)imported {shortname}")
 
 def remove_plugin(shortname):
     try:
@@ -173,7 +172,7 @@ def admin_cmd(pattern=None, command=None, **args):
                 CMD_LIST.update({file_test: [cmd]})
         else:
             if len(Config.COMMAND_HAND_LER) == 2:
-                darkreg = "^" + Config.COMMAND_HAND_LER
+                darkreg = f"^{Config.COMMAND_HAND_LER}"
                 reg = Config.COMMAND_HAND_LER[1]
             elif len(Config.COMMAND_HAND_LER) == 1:
                 darkreg = "^\\" + Config.COMMAND_HAND_LER
@@ -204,8 +203,7 @@ def admin_cmd(pattern=None, command=None, **args):
 
     # add blacklist chats, UB should not respond in these chats
     args["blacklist_chats"] = True
-    black_list_chats = list(Config.UB_BLACK_LIST_CHAT)
-    if len(black_list_chats) > 0:
+    if black_list_chats := list(Config.UB_BLACK_LIST_CHAT):
         args["chats"] = black_list_chats
 
     # add blacklist chats, UB should not respond in these chats
@@ -238,7 +236,7 @@ def sudo_cmd(pattern=None, command=None, **args):
                 SUDO_LIST.update({file_test: [cmd]})
         else:
             if len(Config.SUDO_COMMAND_HAND_LER) == 2:
-                darkreg = "^" + Config.SUDO_COMMAND_HAND_LER
+                darkreg = f"^{Config.SUDO_COMMAND_HAND_LER}"
                 reg = Config.SUDO_COMMAND_HAND_LER[1]
             elif len(Config.SUDO_COMMAND_HAND_LER) == 1:
                 darkreg = "^\\" + Config.SUDO_COMMAND_HAND_LER
@@ -266,8 +264,7 @@ def sudo_cmd(pattern=None, command=None, **args):
         args["outgoing"] = True
     # add blacklist chats, UB should not respond in these chats
     args["blacklist_chats"] = True
-    black_list_chats = list(Config.UB_BLACK_LIST_CHAT)
-    if black_list_chats:
+    if black_list_chats := list(Config.UB_BLACK_LIST_CHAT):
         args["chats"] = black_list_chats
     # add blacklist chats, UB should not respond in these chats
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
@@ -315,13 +312,13 @@ async def edit_or_reply(
                 .get("result")
                 .get("key")
             )
-            text = linktext + f" [here](https://nekobin.com/{key})"
+            text = f"{linktext} [here](https://nekobin.com/{key})"
         except:
             text = re.sub(r"•", ">>", text)
             kresult = requests.post(
                 "https://del.dog/documents", data=text.encode("UTF-8")
             ).json()
-            text = linktext + f" [here](https://del.dog/{kresult['key']})"
+            text = f"{linktext} [here](https://del.dog/{kresult['key']})"
         if event.sender_id in Config.SUDO_USERS:
             if reply_to:
                 return await reply_to.reply(text, link_preview=link_preview)
@@ -419,15 +416,16 @@ def errors_handler(func):
                 'date': datetime.datetime.now()
             }
 
-            text = "**USERBOT CRASH REPORT**\n\n"
-
             link = "[here](https://t.me/sn12384)"
-            text += "If you wanna you can report it"
+            text = "**USERBOT CRASH REPORT**\n\n" + "If you wanna you can report it"
             text += f"- just forward this message {link}.\n"
             text += "Nothing is logged except the fact of error and date\n"
 
-            ftext = "\nDisclaimer:\nThis file uploaded ONLY here,"
-            ftext += "\nwe logged only fact of error and date,"
+            ftext = (
+                "\nDisclaimer:\nThis file uploaded ONLY here,"
+                + "\nwe logged only fact of error and date,"
+            )
+
             ftext += "\nwe respect your privacy,"
             ftext += "\nyou may not report this error if you've"
             ftext += "\nany confidential data here, no one will see your data\n\n"
@@ -471,9 +469,11 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
         time_to_completion = round((total - current) / speed) * 1000
         estimated_total_time = elapsed_time + time_to_completion
         progress_str = "[{0}{1}] {2}%\n".format(
-            ''.join(["▰" for i in range(math.floor(percentage / 10))]),
-            ''.join(["▱" for i in range(10 - math.floor(percentage / 10))]),
-            round(percentage, 2))
+            ''.join(["▰" for _ in range(math.floor(percentage / 10))]),
+            ''.join(["▱" for _ in range(10 - math.floor(percentage / 10))]),
+            round(percentage, 2),
+        )
+
         tmp = progress_str + \
             "{0} of {1}\nETA: {2}".format(
                 humanbytes(current),
@@ -500,21 +500,24 @@ def humanbytes(size):
     while size > power:
         size /= power
         raised_to_pow += 1
-    return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
+    return f"{str(round(size, 2))} {dict_power_n[raised_to_pow]}B"
 
 
 def time_formatter(milliseconds: int) -> str:
     """Inputs time in milliseconds, to get beautified time,
     as string"""
-    seconds, milliseconds = divmod(int(milliseconds), 1000)
+    seconds, milliseconds = divmod(milliseconds, 1000)
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
     days, hours = divmod(hours, 24)
-    tmp = ((str(days) + " day(s), ") if days else "") + \
-        ((str(hours) + " hour(s), ") if hours else "") + \
-        ((str(minutes) + " minute(s), ") if minutes else "") + \
-        ((str(seconds) + " second(s), ") if seconds else "") + \
-        ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
+    tmp = (
+        (f"{str(days)} day(s), " if days else "")
+        + (f"{str(hours)} hour(s), " if hours else "")
+        + (f"{str(minutes)} minute(s), " if minutes else "")
+        + (f"{str(seconds)} second(s), " if seconds else "")
+        + (f"{str(milliseconds)} millisecond(s), " if milliseconds else "")
+    )
+
     return tmp[:-2]
 
 class Loader():
@@ -532,25 +535,25 @@ def start_assistant(shortname):
         from pathlib import Path
 
         path = Path(f"userbot/plugins/assistant/{shortname}.py")
-        name = "userbot.plugins.assistant.{}".format(shortname)
+        name = f"userbot.plugins.assistant.{shortname}"
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         print("Starting Your Assistant Bot.")
-        print("Assistant Sucessfully imported " + shortname)
+        print(f"Assistant Sucessfully imported {shortname}")
     else:
         import importlib
         import sys
         from pathlib import Path
 
         path = Path(f"userbot/plugins/assistant/{shortname}.py")
-        name = "userbot.plugins.assistant.{}".format(shortname)
+        name = f"userbot.plugins.assistant.{shortname}"
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         mod.tgbot = bot.tgbot
         spec.loader.exec_module(mod)
-        sys.modules["userbot.plugins.assistant" + shortname] = mod
-        print("Assistant Has imported " + shortname)        
+        sys.modules[f"userbot.plugins.assistant{shortname}"] = mod
+        print(f"Assistant Has imported {shortname}")        
 
 
 
@@ -573,7 +576,7 @@ class CmdHelp:
         self.FILE = file
         self.ORIGINAL_FILE = file
         self.IS_OFFICIAL = official
-        self.FILE_NAME = file_name if not file_name == None else file + ".py"
+        self.FILE_NAME = file_name if file_name is not None else f"{file}.py"
         self.COMMANDS = {}
         self.FILE_AUTHOR = ""
         self.WARNING = ""
@@ -619,21 +622,20 @@ class CmdHelp:
             result += f"**⬇️ Official:** {'✅' if self.IS_OFFICIAL else '❌'}\n"
 
             if self.INFO == "":
-                if not self.WARNING == "":
-                    result += f"**⚠️ Warning :** {self.WARNING}\n\n"
+                result += f"**⚠️ Warning :** {self.WARNING}\n\n"
             else:
-                if not self.WARNING == "":
+                if self.WARNING != "":
                     result += f"**⚠️ Warning :** {self.WARNING}\n"
                 result += f"**ℹ️ Info:** {self.INFO}\n\n"
 
         for command in self.COMMANDS:
             command = self.COMMANDS[command]
-            if command["params"] == None:
+            if command["params"] is None:
                 result += f"**🛠 Command :** `{COMMAND_HAND_LER[:1]}{command['command']}`\n"
             else:
                 result += f"**🛠 Command :** `{COMMAND_HAND_LER[:1]}{command['command']} {command['params']}`\n"
 
-            if command["example"] == None:
+            if command["example"] is None:
                 result += f"**💬 Details :** `{command['usage']}`\n\n"
             else:
                 result += f"**💬 Details :** `{command['usage']}`\n"

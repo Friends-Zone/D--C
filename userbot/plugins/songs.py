@@ -29,7 +29,7 @@ os.system("rm -rf *.mp3")
 
 def bruh(name):
 
-    os.system("instantmusic -q -s " + name)
+    os.system(f"instantmusic -q -s {name}")
 
 
 # @register(outgoing=True, pattern="^.netease(?: |$)(.*)")
@@ -66,12 +66,6 @@ async def _(event):
         await event.client(ImportChatInviteRequest("DdR2SUvJPBouSW4QlbJU4g"))
     except UserAlreadyParticipantError:
         pass
-    except:
-        await event.reply(
-            "You need to join [this](https://t.me/joinchat/DdR2SUvJPBouSW4QlbJU4g) group for this module to work.",
-            link_preview=False,
-        )
-        return
     args = event.pattern_match.group(1)
     if not args:
         await event.edit("`Enter song name`")
@@ -179,9 +173,10 @@ async def nope(doit):
     await sticcers[0].click(
         doit.chat_id,
         reply_to=doit.reply_to_msg_id,
-        silent=True if doit.is_reply else False,
+        silent=bool(doit.is_reply),
         hide_via=True,
     )
+
     await doit.delete()
 
 

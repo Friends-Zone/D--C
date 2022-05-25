@@ -9,8 +9,6 @@ from userbot import CMD_HELP
 async def _(event):
     if event.fwd_from:
         return
-    animation_interval = 3
-    animation_ttl = range(0, 11)
     input_str = event.pattern_match.group(1)
     if input_str == "vscan":
         await event.edit(input_str)
@@ -28,6 +26,8 @@ async def _(event):
             "`Quick Heal Total Security Checkup\n\n\nSubscription: Pru User\nValid Until: 31/12/2099\n\nTask: 01 of 01 Files Scanned...\n\nReault: No Virus Found...`",
         ]
 
+        animation_interval = 3
+        animation_ttl = range(11)
         for i in animation_ttl:
 
             await asyncio.sleep(animation_interval)
@@ -41,10 +41,6 @@ async def _(event):
     if event.fwd_from:
 
         return
-
-    animation_interval = 5
-
-    animation_ttl = range(0, 11)
 
     input_str = event.pattern_match.group(1)
 
@@ -65,6 +61,10 @@ async def _(event):
             "`Quick Heal Total Security Checkup\n\n\nSubscription: Pru User\nValid Until: 31/12/2099\n\nFile Scanned... 100%\n█████████████████████████ `",
             "`Quick Heal Total Security Checkup\n\n\nSubscription: Pru User\nValid Until: 31/12/2099\n\nTask: 01 of 01 Files Scanned...\n\nReault:⚠️Virus Found⚠️\nMore Info: Torzan, Spyware, Adware`",
         ]
+
+        animation_interval = 5
+
+        animation_ttl = range(11)
 
         for i in animation_ttl:
 

@@ -22,9 +22,7 @@ async def gps(event):
     await event.edit("finding")
 
     geolocator = Nominatim(user_agent="LOCATER")
-    geoloc = geolocator.geocode(input_str)
-
-    if geoloc:
+    if geoloc := geolocator.geocode(input_str):
         lon = geoloc.longitude
         lat = geoloc.latitude
         await reply_to_id.reply(
@@ -60,18 +58,18 @@ def deEmojify(inputString: str) -> str:
 @borg.on(admin_cmd(pattern="map(?: |$)(.*)"))
 async def nope(doit):
     ok = doit.pattern_match.group(1)
-    if not ok:
-        if doit.is_reply:
-            (await doit.get_reply_message()).message
+    if not ok and doit.is_reply:
+        (await doit.get_reply_message()).message
 
-            return
+        return
     mappy = await bot.inline_query("openmap_bot", f"{(deEmojify(ok))}")
     await mappy[0].click(
         doit.chat_id,
         reply_to=doit.reply_to_msg_id,
-        silent=True if doit.is_reply else False,
+        silent=bool(doit.is_reply),
         hide_via=True,
     )
+
     await doit.delete()
 
 

@@ -63,7 +63,7 @@ async def update_spotify_info():
         try:
             RUNNING = True
             spftoken = environ.get("spftoken", None)
-            hed = {"Authorization": "Bearer " + spftoken}
+            hed = {"Authorization": f"Bearer {spftoken}"}
             url = "https://api.spotify.com/v1/me/player/currently-playing"
             response = get(url, headers=hed)
             data = loads(response.content)
@@ -74,7 +74,7 @@ async def update_spotify_info():
             if song != oldsong and artist != oldartist:
                 oldartist = artist
                 environ["oldsong"] = song
-                spobio = " 🎧:-" + song + " - " + artist
+                spobio = f" 🎧:-{song} - {artist}"
                 await borg(UpdateProfileRequest(first_name=spobio))
                 environ["errorcheck"] = "0"
         except KeyError:
@@ -114,7 +114,7 @@ async def dirtyfix():
     await update_spotify_info()
 
 
-@borg.on(admin_cmd(pattern=f"ensp", allow_sudo=True))
+@borg.on(admin_cmd(pattern="ensp", allow_sudo=True))
 @borg.on(events.NewMessage(pattern=r"\.ensp ?(.*)", outgoing=True))
 async def set_biostgraph(setstbio):
     setrecursionlimit(700000)
@@ -127,7 +127,7 @@ async def set_biostgraph(setstbio):
         await setstbio.edit(SPO_BIO_RUNNING)
 
 
-@borg.on(admin_cmd(pattern=f"disp", allow_sudo=True))
+@borg.on(admin_cmd(pattern="disp", allow_sudo=True))
 @borg.on(events.NewMessage(pattern=r"\.disp ?(.*)", outgoing=True))
 async def set_biodgraph(setdbio):
     global SPOTIFYCHECK

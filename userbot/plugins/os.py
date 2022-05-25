@@ -12,7 +12,7 @@ async def _(event):
 
     animation_interval = 0.5
 
-    animation_ttl = range(0, 11)
+    animation_ttl = range(11)
 
     await event.edit("Mac")
 
@@ -46,7 +46,7 @@ async def _(event):
 
     animation_interval = 0.5
 
-    animation_ttl = range(0, 11)
+    animation_ttl = range(11)
 
     await event.edit("Windows")
 
@@ -80,7 +80,7 @@ async def _(event):
 
     animation_interval = 0.5
 
-    animation_ttl = range(0, 11)
+    animation_ttl = range(11)
 
     await event.edit("Linux")
 
@@ -114,7 +114,7 @@ async def _(event):
 
     animation_interval = 0.5
 
-    animation_ttl = range(0, 11)
+    animation_ttl = range(11)
 
     await event.edit("Stock")
 
@@ -148,7 +148,7 @@ async def _(event):
 
     animation_interval = 0.1
 
-    animation_ttl = range(0, 7)
+    animation_ttl = range(7)
 
     await event.edit("OS")
 

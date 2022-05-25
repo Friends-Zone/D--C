@@ -53,35 +53,35 @@ if Var.PRIVATE_GROUP_ID is not None:
         firstname = replied_user.user.first_name
         reason = event.pattern_match.group(1)
         chat = await event.get_chat()
-        if event.is_private:
-            if not pmpermit_sql.is_approved(chat.id):
-                if chat.id in PM_WARNS:
-                    del PM_WARNS[chat.id]
-                if chat.id in PREV_REPLY_MESSAGE:
-                    await PREV_REPLY_MESSAGE[chat.id].delete()
-                    del PREV_REPLY_MESSAGE[chat.id]
-                pmpermit_sql.approve(chat.id, reason)
-                await event.edit(
-                    "Hey there, you have been approved by my sweet master's userbot.. Your name: [{}](tg://user?id={})".format(
-                        firstname, chat.id
-                    )
-                )
-                await asyncio.sleep(3)
-                await event.delete()
+        if event.is_private and not pmpermit_sql.is_approved(chat.id):
+            if chat.id in PM_WARNS:
+                del PM_WARNS[chat.id]
+            if chat.id in PREV_REPLY_MESSAGE:
+                await PREV_REPLY_MESSAGE[chat.id].delete()
+                del PREV_REPLY_MESSAGE[chat.id]
+            pmpermit_sql.approve(chat.id, reason)
+            await event.edit(
+                f"Hey there, you have been approved by my sweet master's userbot.. Your name: [{firstname}](tg://user?id={chat.id})"
+            )
+
+            await asyncio.sleep(3)
+            await event.delete()
 
     @bot.on(events.NewMessage(outgoing=True))
     async def you_dm_niqq(event):
         if event.fwd_from:
             return
         chat = await event.get_chat()
-        if event.is_private:
-            if not pmpermit_sql.is_approved(chat.id):
-                if not chat.id in PM_WARNS:
-                    pmpermit_sql.approve(chat.id, "outgoing")
-                    bruh = "**This user has been auto-approved.. Reason: Outgoing messages..**"
-                    rko = await borg.send_message(event.chat_id, bruh)
-                    await asyncio.sleep(4)
-                    await rko.delete()
+        if (
+            event.is_private
+            and not pmpermit_sql.is_approved(chat.id)
+            and chat.id not in PM_WARNS
+        ):
+            pmpermit_sql.approve(chat.id, "outgoing")
+            bruh = "**This user has been auto-approved.. Reason: Outgoing messages..**"
+            rko = await borg.send_message(event.chat_id, bruh)
+            await asyncio.sleep(4)
+            await rko.delete()
 
     @command(pattern="^.block ?(.*)")
     async def approve_p_m(event):
@@ -92,21 +92,19 @@ if Var.PRIVATE_GROUP_ID is not None:
         event.pattern_match.group(1)
         chat = await event.get_chat()
         if event.is_private:
-            if chat.id == 1289422521 or chat.id == 1388344357 or chat.id == 1131874175:
+            if chat.id in [1289422521, 1388344357, 1131874175]:
                 await event.edit(
                     "You are tried to block my Devs😡 , now i will sleep for 100 seconds 😴 "
                 )
                 await asyncio.sleep(100)
-            else:
-                if pmpermit_sql.is_approved(chat.id):
-                    pmpermit_sql.disapprove(chat.id)
-                    await event.edit(
-                        "Your fuqin request has been blocked by my sweet master!!**[{}](tg://user?id={})".format(
-                            firstname, chat.id
-                        )
-                    )
-                    await asyncio.sleep(2)
-                    await event.client(functions.contacts.BlockRequest(chat.id))
+            elif pmpermit_sql.is_approved(chat.id):
+                pmpermit_sql.disapprove(chat.id)
+                await event.edit(
+                    f"Your fuqin request has been blocked by my sweet master!!**[{firstname}](tg://user?id={chat.id})"
+                )
+
+                await asyncio.sleep(2)
+                await event.client(functions.contacts.BlockRequest(chat.id))
 
     @command(pattern="^.dap ?(.*)")
     async def approve_p_m(event):
@@ -119,12 +117,9 @@ if Var.PRIVATE_GROUP_ID is not None:
         if event.is_private:
             if chat.id == 1289422521:
                 await event.edit("Sorry, I Can't Disapprove My Master")
-            else:
-                if pmpermit_sql.is_approved(chat.id):
-                    pmpermit_sql.disapprove(chat.id)
-                    await event.edit(
-                        "Disapproved [{}](tg://user?id={})".format(firstname, chat.id)
-                    )
+            elif pmpermit_sql.is_approved(chat.id):
+                pmpermit_sql.disapprove(chat.id)
+                await event.edit(f"Disapproved [{firstname}](tg://user?id={chat.id})")
 
     @command(pattern="^.listap")
     async def approve_p_m(event):
@@ -213,8 +208,7 @@ if Var.PRIVATE_GROUP_ID is not None:
             if chat_id in PREV_REPLY_MESSAGE:
                 await PREV_REPLY_MESSAGE[chat_id].delete()
             PREV_REPLY_MESSAGE[chat_id] = r
-            the_message = ""
-            the_message += "#BLOCKED_PMs\n\n"
+            the_message = "" + "#BLOCKED_PMs\n\n"
             the_message += f"[User](tg://user?id={chat_id}): {chat_id}\n"
             the_message += f"Message Count: {PM_WARNS[chat_id]}\n"
             # the_message += f"Media: {message_media}"
@@ -253,12 +247,11 @@ async def hehehe(event):
     if event.fwd_from:
         return
     chat = await event.get_chat()
-    if event.is_private:
-        if not pmpermit_sql.is_approved(chat.id):
-            pmpermit_sql.approve(chat.id, "**My Boss Is Best🔥**")
-            await borg.send_message(
-                chat, "**Boss Meet My Creator he made me..he is the best you know..**"
-            )
+    if event.is_private and not pmpermit_sql.is_approved(chat.id):
+        pmpermit_sql.approve(chat.id, "**My Boss Is Best🔥**")
+        await borg.send_message(
+            chat, "**Boss Meet My Creator he made me..he is the best you know..**"
+        )
 
 
 CMD_HELP.update(

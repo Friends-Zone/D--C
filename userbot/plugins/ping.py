@@ -7,14 +7,14 @@ from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "DARK COBRA"
 
 
-@borg.on(admin_cmd(pattern=f"pingy$", outgoing=True))
-@borg.on(sudo_cmd(pattern=f"pingy$", allow_sudo=True))
+@borg.on(admin_cmd(pattern="pingy$", outgoing=True))
+@borg.on(sudo_cmd(pattern="pingy$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
     animation_interval = 0.2
-    animation_ttl = range(0, 26)
+    animation_ttl = range(26)
     await edit_or_reply(event, "ping....")
     animation_chars = [
         "⬛⬛⬛⬛⬛⬛⬛⬛⬛",

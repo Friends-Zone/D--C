@@ -44,8 +44,7 @@ async def iqless(e):
 @borg.on(admin_cmd(pattern=r"ggl (.*)"))
 async def let_me_google_that_for_you(lmgtfy_q):
     textx = await lmgtfy_q.get_reply_message()
-    qry = lmgtfy_q.pattern_match.group(1)
-    if qry:
+    if qry := lmgtfy_q.pattern_match.group(1):
         query = str(qry)
     elif textx:
         query = textx
@@ -253,7 +252,7 @@ async def emoji_penis(e):
     await e.edit(titid)
 
 
-@borg.on(admin_cmd(pattern=f"muth", outgoing=True))
+@borg.on(admin_cmd(pattern="muth", outgoing=True))
 async def _(event):
 
     if event.fwd_from:
@@ -262,7 +261,7 @@ async def _(event):
 
     animation_interval = 0.3
 
-    animation_ttl = range(0, 100)
+    animation_ttl = range(100)
 
     animation_chars = [
         "8✊️===D",
@@ -299,10 +298,7 @@ emojis = {
     "f": "😂😂😂😂😂😂😂😂\n😂😂😂😂😂😂😂😂😂\n😂😂\n😂😂\n😂😂😂😂😂😂\n😂😂😂😂😂😂\n😂😂\n😂😂\n😂😂\n😂😂\n😂😂",
 }
 
-unpacked_emojis = ""
-
-for emoji in emojis:
-    unpacked_emojis += f"`{emoji}`\n"
+unpacked_emojis = "".join(f"`{emoji}`\n" for emoji in emojis)
 
 
 @borg.on(admin_cmd(pattern="emoji ?(.*)"))

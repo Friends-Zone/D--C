@@ -3,6 +3,8 @@ from telethon.tl.types import ChatBannedRights
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
     import os
+
+
     class Config(object):
         LOGGER = True
         # Get this value from my.telegram.org! Please do not steal
@@ -12,7 +14,7 @@ if ENV:
         SCREEN_SHOT_LAYER_ACCESS_KEY = os.environ.get("SCREEN_SHOT_LAYER_ACCESS_KEY", None)
         # Send .get_id in any group to fill this value.
         SUDO_COMMAND_HAND_LER = os.environ.get("SUDO_COMMAND_HAND_LER", r"\.")
-    
+
         # This is required for the plugins involving the file system.
         TMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./DOWNLOADS/")
         # This is required for the speech to text module. Get your USERNAME from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html
@@ -42,7 +44,10 @@ if ENV:
         # TG API limit. A message can have maximum 4096 characters!
         MAX_MESSAGE_SIZE_LIMIT = 4095
         # set blacklist_chats where you do not want userbot's features
-        UB_BLACK_LIST_CHAT = set(int(x) for x in os.environ.get("UB_BLACK_LIST_CHAT", "").split())
+        UB_BLACK_LIST_CHAT = {
+            int(x) for x in os.environ.get("UB_BLACK_LIST_CHAT", "").split()
+        }
+
         # maximum number of messages for antiflood
         MAX_ANTI_FLOOD_MESSAGES = 10
         # warn mode for anti flood
@@ -72,13 +77,11 @@ if ENV:
         #heroku 
         HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
         HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
-        # send .get_id in any channel to forward all your NEW PMs to this group
-        PRIVATE_GROUP_BOT_API_ID = os.environ.get("PRIVATE_GROUP_BOT_API_ID", None)
-        if PRIVATE_GROUP_BOT_API_ID:
+        if PRIVATE_GROUP_BOT_API_ID := os.environ.get(
+            "PRIVATE_GROUP_BOT_API_ID", None
+        ):
             PRIVATE_GROUP_BOT_API_ID = int(PRIVATE_GROUP_BOT_API_ID)
-        # send .get_id in your private channel to forward all your Private messages
-        PM_LOGGR_BOT_API_ID = os.environ.get("PM_LOGGR_BOT_API_ID", None)
-        if PM_LOGGR_BOT_API_ID:
+        if PM_LOGGR_BOT_API_ID := os.environ.get("PM_LOGGR_BOT_API_ID", None):
             PM_LOGGR_BOT_API_ID = int(PM_LOGGR_BOT_API_ID)
         # For Databases
         # can be None in which case plugins requiring
@@ -116,9 +119,8 @@ if ENV:
         AUTH_TOKEN_DATA = os.environ.get("AUTH_TOKEN_DATA", None)
         if AUTH_TOKEN_DATA != None:
             os.makedirs(TMP_DOWNLOAD_DIRECTORY)
-            t_file = open(TMP_DOWNLOAD_DIRECTORY+"auth_token.txt","w")
-            t_file.write(AUTH_TOKEN_DATA)
-            t_file.close()
+            with open(f"{TMP_DOWNLOAD_DIRECTORY}auth_token.txt", "w") as t_file:
+                t_file.write(AUTH_TOKEN_DATA)
         YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
         GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
         #MongoDB
@@ -136,7 +138,8 @@ if ENV:
         DEEP_AI = os.environ.get("DEEP_AI", None)
         #for tag logs
         TAG_LOG = os.environ.get("TAG_LOG", None)
-       
+
+
 else:
     class Config(object):
         DB_URI = None

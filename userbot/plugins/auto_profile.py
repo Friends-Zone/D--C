@@ -73,7 +73,7 @@ async def _(event):
                 "Successfully Changed Profile Name",
             )
         await asyncio.sleep(TIME_OUT)
-    await event.edit(f"Auto Name has been started Master")
+    await event.edit("Auto Name has been started Master")
 
 
 FONT_FILE_TO_USE = "Fonts/digital.ttf"

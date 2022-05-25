@@ -140,7 +140,7 @@ async def _(event):
                 file=pic,
             )
         else:
-            await borg.send_message(event.chat_id, f"**I am Going afk!**", file=pic)
+            await borg.send_message(event.chat_id, "**I am Going afk!**", file=pic)
         await asyncio.sleep(0.001)
         await event.delete()
         try:

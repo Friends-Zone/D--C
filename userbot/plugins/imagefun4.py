@@ -48,7 +48,7 @@ async def scan(event):
         offset = (x, y)
         background.paste(mask, offset, mask=mask)
     file_name = "danish.png"
-    hehe = path + "/" + file_name
+    hehe = f"{path}/{file_name}"
     background.save(hehe, "PNG")
     await event.client.send_file(
         event.chat_id, hehe, force_document=False, reply_to=event.reply_to_msg_id
@@ -87,7 +87,7 @@ async def scan(event):
         offset = (x, y)
         background.paste(mask, offset, mask=mask)
     file_name = "danish.png"
-    hehe = path + "/" + file_name
+    hehe = f"{path}/{file_name}"
     background.save(hehe, "PNG")
     await event.client.send_file(
         event.chat_id, hehe, force_document=False, reply_to=event.reply_to_msg_id
@@ -126,7 +126,7 @@ async def scan(event):
         offset = (x, y)
         background.paste(mask, offset, mask=mask)
     file_name = "danish.png"
-    hehe = path + "/" + file_name
+    hehe = f"{path}/{file_name}"
     background.save(hehe, "PNG")
     await event.client.send_file(
         event.chat_id, hehe, force_document=False, reply_to=event.reply_to_msg_id
@@ -165,7 +165,7 @@ async def scan(event):
         offset = (x, y)
         background.paste(mask, offset, mask=mask)
     file_name = "danish.png"
-    hehe = path + "/" + file_name
+    hehe = f"{path}/{file_name}"
     background.save(hehe, "PNG")
     await event.client.send_file(
         event.chat_id, hehe, force_document=False, reply_to=event.reply_to_msg_id
@@ -204,7 +204,7 @@ async def scan(event):
         offset = (x, y)
         background.paste(mask, offset, mask=mask)
     file_name = "danish.png"
-    hehe = path + "/" + file_name
+    hehe = f"{path}/{file_name}"
     background.save(hehe, "PNG")
     await event.client.send_file(
         event.chat_id, hehe, force_document=False, reply_to=event.reply_to_msg_id
@@ -243,7 +243,7 @@ async def scan(event):
         offset = (x, y)
         background.paste(mask, offset, mask=mask)
     file_name = "danish.png"
-    hehe = path + "/" + file_name
+    hehe = f"{path}/{file_name}"
     background.save(hehe, "PNG")
     await event.client.send_file(
         event.chat_id, hehe, force_document=False, reply_to=event.reply_to_msg_id
@@ -292,7 +292,7 @@ async def scan(event):
         background.paste(mask, offset, mask=mask)
     await event.delete()
     file_name = "danish.png"
-    hehe = path + "/" + file_name
+    hehe = f"{path}/{file_name}"
     background.save(hehe, "PNG")
     await event.client.send_file(
         event.chat_id, hehe, force_document=False, reply_to=event.reply_to_msg_id

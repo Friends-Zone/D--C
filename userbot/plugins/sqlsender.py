@@ -10,7 +10,7 @@ async def send(event):
         return
     message_id = event.message.id
     input_str = event.pattern_match["shortname"]
-    the_plugin_file = "./userbot/plugins/sql_helper/{}.py".format(input_str)
+    the_plugin_file = f"./userbot/plugins/sql_helper/{input_str}.py"
 
     await event.client.send_file(  # pylint:disable=E0602
         event.chat_id,
@@ -20,7 +20,7 @@ async def send(event):
         reply_to=message_id,
     )
 
-    await event.edit("Uploaded {} ".format(input_str))
+    await event.edit(f"Uploaded {input_str} ")
     await event.delete()
 
 

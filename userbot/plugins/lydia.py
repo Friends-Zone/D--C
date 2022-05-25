@@ -41,15 +41,15 @@ async def addcf(event):
     if reply_msg:
         session = Lydia.create_session()
         session_id = session.id
-        ACC_LYDIA.update({str(event.chat_id) + " " + str(reply_msg.sender_id): session})
+        ACC_LYDIA.update({f"{str(event.chat_id)} {str(reply_msg.sender_id)}": session})
         SESSION_ID.update(
-            {str(event.chat_id) + " " + str(reply_msg.sender_id): session_id}
+            {f"{str(event.chat_id)} {str(reply_msg.sender_id)}": session_id}
         )
+
         await event.edit(
-            "Lydia successfully enabled for user: {} in chat: {}".format(
-                str(reply_msg.sender_id), str(event.chat_id)
-            )
+            f"Lydia successfully enabled for user: {str(reply_msg.sender_id)} in chat: {str(event.chat_id)}"
         )
+
     else:
         await event.edit("Reply to a user to activate Lydia AI on them")
 
@@ -63,13 +63,12 @@ async def remcf(event):
     await event.edit("Processing...")
     reply_msg = await event.get_reply_message()
     try:
-        del ACC_LYDIA[str(event.chat_id) + " " + str(reply_msg.sender_id)]
-        del SESSION_ID[str(event.chat_id) + " " + str(reply_msg.sender_id)]
+        del ACC_LYDIA[f"{str(event.chat_id)} {str(reply_msg.sender_id)}"]
+        del SESSION_ID[f"{str(event.chat_id)} {str(reply_msg.sender_id)}"]
         await event.edit(
-            "Lydia successfully disabled for user: {} in chat: {}".format(
-                str(reply_msg.sender_id), str(event.chat_id)
-            )
+            f"Lydia successfully disabled for user: {str(reply_msg.sender_id)} in chat: {str(event.chat_id)}"
         )
+
     except KeyError:
         await event.edit("This person does not have Lydia activated on him/her.")
 
@@ -78,13 +77,13 @@ async def remcf(event):
 async def user(event):
     event.text
     try:
-        session = ACC_LYDIA[str(event.chat_id) + " " + str(event.sender_id)]
-        session_id = SESSION_ID[str(event.chat_id) + " " + str(event.sender_id)]
+        session = ACC_LYDIA[f"{str(event.chat_id)} {str(event.sender_id)}"]
+        session_id = SESSION_ID[f"{str(event.chat_id)} {str(event.sender_id)}"]
         msg = event.text
         async with event.client.action(event.chat_id, "typing"):
             text_rep = session.think_thought((session_id, msg))
             wait_time = 0
-            for i in range(len(text_rep)):
+            for _ in range(len(text_rep)):
                 wait_time = wait_time + 0.1
             await asyncio.sleep(wait_time)
             await event.reply(text_rep)

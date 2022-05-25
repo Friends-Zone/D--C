@@ -36,9 +36,7 @@ async def _(event):
             m_list = None
             with open(downloaded_file_name, "rb") as fd:
                 m_list = fd.readlines()
-            message = ""
-            for m in m_list:
-                message += m.decode("UTF-8") + "\r\n"
+            message = "".join(m.decode("UTF-8") + "\r\n" for m in m_list)
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -60,7 +58,7 @@ async def _(event):
         return
     end = datetime.now()
     ms = (end - start).seconds
-    await event.edit("Created BarCode in {} seconds".format(ms))
+    await event.edit(f"Created BarCode in {ms} seconds")
     await asyncio.sleep(2)
     await event.delete()
 

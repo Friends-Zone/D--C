@@ -52,8 +52,7 @@ async def _(event):
     to_promote_id = None
     rights = ChatAdminRights(post_messages=True)
     input_str = event.pattern_match.group(1)
-    reply_msg_id = event.message.id
-    if reply_msg_id:
+    if reply_msg_id := event.message.id:
         r_mesg = await event.get_reply_message()
         to_promote_id = r_mesg.sender_id
     elif input_str:

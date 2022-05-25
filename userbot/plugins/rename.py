@@ -6,7 +6,7 @@ from datetime import datetime
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd, progress
 
-thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
+thumb_image_path = f"{Config.TMP_DOWNLOAD_DIRECTORY}thumb_image.jpg"
 
 
 @borg.on(admin_cmd(pattern="rename (.*)"))
@@ -67,7 +67,7 @@ async def _(event):
             await asyncio.sleep(2)
             await dcevent.delete()
         else:
-            await dcevent.edit("File Not Found {}".format(input_str))
+            await dcevent.edit(f"File Not Found {input_str}")
     else:
         await dcevent.edit(".rename file.name as reply to a Telegram media/file")
 

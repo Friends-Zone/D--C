@@ -26,9 +26,6 @@ from userbot.utils import admin_cmd
 
 @borg.on(admin_cmd("rmbg ?(.*)"))
 async def _(event):
-    HELP_STR = (
-        "`.rmbg` as reply to a media, or give a link as an argument to this command"
-    )
     if event.fwd_from:
         return
     if Config.REM_BG_API_KEY is None:
@@ -57,6 +54,9 @@ async def _(event):
         await event.edit("sending to ReMove.BG")
         output_file_name = ReTrieveURL(input_str)
     else:
+        HELP_STR = (
+            "`.rmbg` as reply to a media, or give a link as an argument to this command"
+        )
         await event.edit(HELP_STR)
         return
     contentType = output_file_name.headers.get("content-type")
@@ -74,10 +74,9 @@ async def _(event):
         end = datetime.now()
         ms = (end - start).seconds
         await event.edit(
-            "Removed dat annoying Backgroup in {} seconds, powered by @DARKCOBRA©™".format(
-                ms
-            )
+            f"Removed dat annoying Backgroup in {ms} seconds, powered by @DARKCOBRA©™"
         )
+
     else:
         await event.edit(
             "ReMove.BG API returned Errors. Please report to @UniBorg\n`{}".format(
@@ -95,14 +94,13 @@ def ReTrieveFile(input_file_name):
     files = {
         "image_file": (input_file_name, open(input_file_name, "rb")),
     }
-    r = requests.post(
+    return requests.post(
         "https://api.remove.bg/v1.0/removebg",
         headers=headers,
         files=files,
         allow_redirects=True,
         stream=True,
     )
-    return r
 
 
 def ReTrieveURL(input_url):
@@ -110,11 +108,10 @@ def ReTrieveURL(input_url):
         "X-API-Key": Config.REM_BG_API_KEY,
     }
     data = {"image_url": input_url}
-    r = requests.post(
+    return requests.post(
         "https://api.remove.bg/v1.0/removebg",
         headers=headers,
         data=data,
         allow_redirects=True,
         stream=True,
     )
-    return r

@@ -14,10 +14,6 @@ async def _(event):
 
         return
 
-    animation_interval = 0.3
-
-    animation_ttl = range(0, 100)
-
     input_str = event.pattern_match.group(1)
 
     if input_str == "muth":
@@ -36,6 +32,10 @@ async def _(event):
             "8==✊️=D💦💦",
             "8=✊️==D💦💦💦",
         ]
+
+        animation_interval = 0.3
+
+        animation_ttl = range(100)
 
         for i in animation_ttl:
 

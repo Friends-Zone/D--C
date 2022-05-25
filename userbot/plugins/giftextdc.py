@@ -45,7 +45,7 @@ async def lol(event):
     def adi(text):
         img = Image.open(me)
         #fnt = f'userbot/helpers/styles/{font}'
-        fonts = ImageFont.truetype(r"Fonts/{}".format(font),size)
+        fonts = ImageFont.truetype(f"Fonts/{font}", size)
         draw = ImageDraw.Draw(img)
         draw.text(((int(x), int(y))), text,fill=(color),font=fonts )
 

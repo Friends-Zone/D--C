@@ -16,8 +16,7 @@ from uniborg.util import admin_cmd
 async def lst(event):
     if event.fwd_from:
         return
-    input_str = event.pattern_match.group(1)
-    if input_str:
+    if input_str := event.pattern_match.group(1):
         msg = "**Files in {} :**\n".format(input_str)
         files = os.listdir(input_str)
     else:

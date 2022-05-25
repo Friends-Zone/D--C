@@ -22,7 +22,7 @@ async def _(event):
 
     animation_interval = 0.5
 
-    animation_ttl = range(0, 9)
+    animation_ttl = range(9)
 
     await event.edit("You Noob")
 
@@ -53,7 +53,7 @@ async def _(event):
 
     animation_interval = 0.5
 
-    animation_ttl = range(0, 9)
+    animation_ttl = range(9)
 
     await event.edit("Me Noob")
 
@@ -84,7 +84,7 @@ async def _(event):
 
     animation_interval = 0.5
 
-    animation_ttl = range(0, 8)
+    animation_ttl = range(8)
 
     await event.edit("You Pro")
 
@@ -114,7 +114,7 @@ async def _(event):
 
     animation_interval = 0.5
 
-    animation_ttl = range(0, 8)
+    animation_ttl = range(8)
 
     await event.edit("Me Pro")
 

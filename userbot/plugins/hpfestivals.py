@@ -17,11 +17,10 @@ def choser(cmd, pack, blacklist={}):
         if event.fwd_from:
             return
         animation_interval = 2
-        animation_ttl = range(0, 8)
+        animation_ttl = range(8)
         nonlocal docs
 
-        for i in animation_ttl:
-
+        for _ in animation_ttl:
             await asyncio.sleep(animation_interval)
             if docs is None:
                 docs = [

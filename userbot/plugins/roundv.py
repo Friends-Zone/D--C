@@ -41,7 +41,6 @@ async def _(event):
         except YouBlockedUserError:
             await okay.edit("__Please unblock @TelescopyBot and try again__")
             return
-            await okay.delete()
         if not response.media:
             await event.client.send_message(event.chat_id, response.message)
         if response.media:

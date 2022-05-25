@@ -14,7 +14,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 2
-    animation_ttl = range(0, 36)
+    animation_ttl = range(36)
     # input_str = event.pattern_match.group(1)
     # if input_str == "gulli":
     await event.edit("Starting..")

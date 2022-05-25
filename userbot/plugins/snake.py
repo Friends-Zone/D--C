@@ -12,7 +12,7 @@ async def _(event):
 
     animation_interval = 0.3
 
-    animation_ttl = range(0, 27)
+    animation_ttl = range(27)
 
     await event.edit("Snake")
 

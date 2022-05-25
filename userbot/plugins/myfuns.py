@@ -181,17 +181,14 @@ async def get_user(event):
 async def slap(replied_user, event):
     user_id = replied_user.user.id
     first_name = replied_user.user.first_name
-    username = replied_user.user.username
-    if username:
-        slapped = "@{}".format(username)
+    if username := replied_user.user.username:
+        slapped = f"@{username}"
     else:
         slapped = f"[{first_name}](tg://user?id={user_id})"
 
     temp = random.choice(SLAP_TEMPLATES)
 
-    caption = temp.format(user1=DEFAULTUSER, victim=slapped)
-
-    return caption
+    return temp.format(user1=DEFAULTUSER, victim=slapped)
 
 
 @borg.on(admin_cmd(outgoing=True, pattern="mrape"))

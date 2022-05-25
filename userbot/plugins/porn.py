@@ -21,7 +21,7 @@ async def _(event):  # @danish_00 original
 
     animation_interval = 0.2
 
-    animation_ttl = range(0, 8)
+    animation_ttl = range(8)
 
     await event.edit("`Connecting...`")
 
@@ -52,7 +52,7 @@ async def _(event):
 
     animation_interval = 0.2
 
-    animation_ttl = range(0, 7)
+    animation_ttl = range(7)
 
     await event.edit("`Connecting...`")
 
@@ -85,7 +85,7 @@ async def _(event):
 
     animation_interval = 0.2
 
-    animation_ttl = range(0, 5)
+    animation_ttl = range(5)
 
     await event.edit("`Connecting...`")  # @danish_00 original
 

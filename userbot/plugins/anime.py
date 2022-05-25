@@ -46,7 +46,6 @@ async def formatJSON(outData):
     res = list(jsonData.keys())
     if "errors" in res:
         msg += f"**Error** : `{jsonData['errors'][0]['message']}`"
-        return msg
     else:
         jsonData = jsonData["data"]["Media"]
         if "bannerImage" in jsonData.keys():
@@ -59,7 +58,7 @@ async def formatJSON(outData):
         msg += f"\n\n**Type** : {jsonData['format']}"
         msg += f"\n**Genres** : "
         for g in jsonData["genres"]:
-            msg += g + " "
+            msg += f"{g} "
         msg += f"\n**Status** : {jsonData['status']}"
         msg += f"\n**Episode** : {jsonData['episodes']}"
         msg += f"\n**Year** : {jsonData['startDate']['year']}"
@@ -68,7 +67,8 @@ async def formatJSON(outData):
         # https://t.me/catuserbot_support/19496
         cat = f"{jsonData['description']}"
         msg += " __" + re.sub("<br>", "\n", cat) + "__"
-        return msg
+
+    return msg
 
 
 @borg.on(admin_cmd(pattern="anime ?(.*)"))

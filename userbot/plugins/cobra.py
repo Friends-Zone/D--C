@@ -66,7 +66,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 link_preview=False,
             )
             await event.answer([result] if result else None)
-        elif not event.query.user_id == bot.uid:
+        elif event.query.user_id != bot.uid:
             s = builder.article(
                 title="I am Not your Servant",
                 description="Do your Own work sir don't interfere in Others Work",
@@ -134,19 +134,17 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         )
     )
     async def on_plug_in_callback_query_handler(event):
-        if not event.query.user_id == bot.uid:
+        if event.query.user_id != bot.uid:
             atul = "Please get your own Userbot😁😁,for more info visit @DARK_COBRA_SUPPORT! 😎😎"
             await event.answer(atul, cache_time=0, alert=True)
             return
         plugin_name = event.data_match.group(1).decode("UTF-8")
         global shivam_sh1vam
-        shivam_sh1vam = "{}".format(plugin_name)
+        shivam_sh1vam = f"{plugin_name}"
         help_string = "Commands found in {}:\n".format(plugin_name)
         k = "💠🔮💎"
-        u = 0
-        for i in CMD_LIST[plugin_name]:
-            u += 1
-            help_string += str(k[u % 3]) + " " + i + "\n\n"
+        for u, i in enumerate(CMD_LIST[plugin_name], start=1):
+            help_string += f"{str(k[u % 3])} {i}" + "\n\n"
         if plugin_name in CMD_HELP:
             help_string += (
                 f"**📤 PLUGIN NAME 📤 :** `{plugin_name}` \n\n{CMD_HELP[plugin_name]}"
@@ -161,12 +159,13 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         try:
             if event.query.user_id == bot.uid:
                 dc = [
-                    custom.Button.inline(" 𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                    custom.Button.inline(" 𝕭𝖆𝖈𝖐 ", data=f"back({shivam})"),
                     custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
                     custom.Button.inline(
-                        " 𝖀𝖓𝖑𝖔𝖆𝖉 ", data="unload({})".format(shivam_sh1vam)
+                        " 𝖀𝖓𝖑𝖔𝖆𝖉 ", data=f"unload({shivam_sh1vam})"
                     ),
                 ]
+
                 await event.edit(reply_pop_up_alert, buttons=dc)
             else:
                 reply_pop_up_alert = "Please get your own Userbot, and don't use mine for more info visit @DARK_COBRA_SUPPORT!"
@@ -174,12 +173,11 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         except:
             if event.query.user_id == bot.uid:
                 sh1vam = [
-                    custom.Button.inline(
-                        "◤✞ 𝕲𝖔 𝕭𝖆𝖈𝖐 ✞◥", data="back({})".format(shivam)
-                    ),
+                    custom.Button.inline("◤✞ 𝕲𝖔 𝕭𝖆𝖈𝖐 ✞◥", data=f"back({shivam})"),
                     custom.Button.inline("◤✞ 𝕮𝖑𝖔𝖘𝖊 ✞◥", data="close"),
                 ]
-                halps = "Do .help {} to get the list of commands.".format(plugin_name)
+
+                halps = f"Do .help {plugin_name} to get the list of commands."
                 await event.edit(halps, buttons=sh1vam)
             else:
                 reply_pop_up_alert = "Please get your own Userbot, and don't use mine for more info visit @DARK_COBRA_SUPPORT!"
@@ -193,12 +191,13 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
             try:
                 fcix = [
-                    custom.Button.inline("  𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                    custom.Button.inline("  𝕭𝖆𝖈𝖐 ", data=f"back({shivam})"),
                     custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
                     custom.Button.inline(
-                        " 𝖀𝖓𝖑𝖔𝖆𝖉 ", data="unload({})".format(shivam_sh1vam)
+                        " 𝖀𝖓𝖑𝖔𝖆𝖉 ", data=f"unload({shivam_sh1vam})"
                     ),
                 ]
+
                 load_module(
                     event.data_match.group(1).decode("UTF-8")
                 )  # kyu sir kang krne m musil aa rhi h kya ... Bolo help kr du kya 😂😂😂
@@ -209,20 +208,19 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 )
             except Exception as e:
                 await event.edit(
-                    "Error{}".format(shortname, str(e))
-                    + "DarkCobra Has Successfully loaded"
+                    (f"Error{shortname}" + "DarkCobra Has Successfully loaded")
                     + str(event.data_match.group(1).decode("UTF-8")),
                     buttons=fcix,
                 )
+
         else:
             event.data_match.group(1).decode("UTF-8")
             fcix = [
-                custom.Button.inline("  𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                custom.Button.inline("  𝕭𝖆𝖈𝖐 ", data=f"back({shivam})"),
                 custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
-                custom.Button.inline(
-                    " 𝖀𝖓𝖑𝖔𝖆𝖉 ", data="unload({})".format(shivam_sh1vam)
-                ),
+                custom.Button.inline(" 𝖀𝖓𝖑𝖔𝖆𝖉 ", data=f"unload({shivam_sh1vam})"),
             ]
+
             reply_pop_up_alert = (
                 "Please get your own Userbot,for more info visit @DARK_COBRA_SUPPORT!"
             )
@@ -234,12 +232,11 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
             try:
                 fcix = [
-                    custom.Button.inline(" 𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                    custom.Button.inline(" 𝕭𝖆𝖈𝖐 ", data=f"back({shivam})"),
                     custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
-                    custom.Button.inline(
-                        " 𝕷𝖔𝖆𝖉 ", data="load({})".format(shivam_sh1vam)
-                    ),
+                    custom.Button.inline(" 𝕷𝖔𝖆𝖉 ", data=f"load({shivam_sh1vam})"),
                 ]
+
                 remove_plugin(
                     event.data_match.group(1).decode("UTF-8")
                 )  # kyu sir kang krne m muskil ho rhi h kya bologe toh help krdu 😂😂
@@ -250,18 +247,19 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 )
             except Exception as e:
                 await event.edit(
-                    "Error{}".format(shortname, str(e))
-                    + "DarkCobra Has Successfully unloaded"
+                    (f"Error{shortname}" + "DarkCobra Has Successfully unloaded")
                     + str(event.data_match.group(1).decode("UTF-8")),
                     buttons=fcix,
                 )
+
         else:
             event.data_match.group(1).decode("UTF-8")
             fcix = [
-                custom.Button.inline("  𝕭𝖆𝖈𝖐 ", data="back({})".format(shivam)),
+                custom.Button.inline("  𝕭𝖆𝖈𝖐 ", data=f"back({shivam})"),
                 custom.Button.inline(" 𝕮𝖑𝖔𝖘𝖊 ", data="close"),
-                custom.Button.inline(" 𝕷𝖔𝖆𝖉 ", data="load({})".format(shivam_sh1vam)),
+                custom.Button.inline(" 𝕷𝖔𝖆𝖉 ", data=f"load({shivam_sh1vam})"),
             ]
+
             reply_pop_up_alert = (
                 "Please get your own Userbot,for more info visit @DARK_COBRA_SUPPORT!"
             )
@@ -293,17 +291,15 @@ def paginate_help(page_number, loaded_plugins, prefix):
     number_of_rows = Config.NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD
     number_of_cols = Config.NO_OF_COLOUMS_DISPLAYED_IN_H_ME_CMD
     multi = Config.EMOJI_TO_DISPLAY_IN_HELP
-    helpable_plugins = []
-    for p in loaded_plugins:
-        if not p.startswith("_"):
-            helpable_plugins.append(p)
+    helpable_plugins = [p for p in loaded_plugins if not p.startswith("_")]
     helpable_plugins = sorted(helpable_plugins)
     modules = [
         custom.Button.inline(
-            "{} {}".format(random.choice(list(multi)), x), data="us_plugin_{}".format(x)
+            f"{random.choice(list(multi))} {x}", data=f"us_plugin_{x}"
         )
         for x in helpable_plugins
     ]
+
     pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols]))
     if len(modules) % number_of_cols == 1:
         pairs.append((modules[-1],))
@@ -317,14 +313,15 @@ def paginate_help(page_number, loaded_plugins, prefix):
         ] + [
             (
                 custom.Button.inline(
-                    "◃:✮𝙿𝚁𝙴𝚅.❃", data="{}_prev({})".format(prefix, modulo_page)
+                    "◃:✮𝙿𝚁𝙴𝚅.❃", data=f"{prefix}_prev({modulo_page})"
                 ),
                 custom.Button.inline("⋇⋆𝙲𝙻✦𝚂𝙴⋆⋇", data="close"),
                 custom.Button.inline(
-                    "❃.𝙽𝙴𝚇𝚃✮:▹", data="{}_next({})".format(prefix, modulo_page)
+                    "❃.𝙽𝙴𝚇𝚃✮:▹", data=f"{prefix}_next({modulo_page})"
                 ),
             )
         ]
+
     return pairs
 
 

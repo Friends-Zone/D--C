@@ -14,7 +14,6 @@ async def gbun(event):
     gbunVar = event.text
     gbunVar = gbunVar[6:]
     mentions = "`Warning!! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n`"
-    no_reason = "__Reason: Potential spammer. __"
     await event.edit("**Summoning out le Gungnir ❗️⚜️☠️**")
     await asyncio.sleep(3.5)
     chat = await event.get_input_chat()
@@ -39,15 +38,18 @@ async def gbun(event):
                 "**user's Name: ** __{}__\n"
                 "**ID : ** `{}`\n"
             ).format(firstname, idd, firstname, idd)
-            if usname == None:
+            if usname == "None":
+                pass
+            elif usname is None:
                 jnl += "**Victim Nigga's username: ** `Doesn't own a username!`\n"
-            elif usname != "None":
+            else:
                 jnl += "**Victim Nigga's username** : @{}\n".format(usname)
             if len(gbunVar) > 0:
-                gbunm = "`{}`".format(gbunVar)
-                gbunr = "**Reason: **" + gbunm
+                gbunm = f"`{gbunVar}`"
+                gbunr = f"**Reason: **{gbunm}"
                 jnl += gbunr
             else:
+                no_reason = "__Reason: Potential spammer. __"
                 jnl += no_reason
             await reply_message.reply(jnl)
     else:

@@ -13,8 +13,7 @@ from userbot.utils import admin_cmd, sudo_cmd, CmdHelp, edit_or_reply
 @borg.on(sudo_cmd(allow_sudo=True, pattern="plinfo(?: |$)(.*)"))
 async def info(event):
     """ For .plinfo command,"""
-    args = event.pattern_match.group(1).lower()
-    if args:
+    if args := event.pattern_match.group(1).lower():
         if args in CmdHelp:
             await edit_or_reply(event, str(CmdHelp[args]))
         else:
@@ -26,6 +25,6 @@ async def info(event):
         )
         string = ""
         for i in CmdHelp:
-            string += "`" + str(i)
+            string += f"`{str(i)}"
             string += "`\n"
         await event.reply(string)

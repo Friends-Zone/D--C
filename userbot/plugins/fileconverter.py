@@ -18,9 +18,8 @@ from userbot.utils import admin_cmd, edit_or_reply, sudo_cmd
 @borg.on(admin_cmd(pattern=r"open", outgoing=True))
 async def _(event):
     b = await event.client.download_media(await event.get_reply_message())
-    a = open(b, "r")
-    c = a.read()
-    a.close()
+    with open(b, "r") as a:
+        c = a.read()
     a = await event.reply("Reading file...")
     if len(c) >= 4096:
         await event.edit("output file too large lemme paste it 😜😜")  # hehe
@@ -32,10 +31,9 @@ async def _(event):
             f" Output file is too large Not supported By Telegram\n**So Pasted to** [Dog Bin]({url}) 😁😁",
             link_preview=False,
         )
-        await a.delete()
     else:
         await event.client.send_message(event.chat_id, f"{c}")
-        await a.delete()
+    await a.delete()
     os.remove(b)
 
 
@@ -65,7 +63,7 @@ async def get(event):
 
 # hehe
 
-thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
+thumb_image_path = f"{Config.TMP_DOWNLOAD_DIRECTORY}thumb_image.jpg"
 
 
 @borg.on(admin_cmd(pattern="stoi"))
@@ -79,11 +77,11 @@ async def danish(hehe):
         hehe.reply_to_msg_id
     cobra = await edit_or_reply(hehe, "Converting.....")
 
-    input_str = "dc.jpeg"
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if cobra.reply_to_msg_id:
         datetime.now()
+        input_str = "dc.jpeg"
         file_name = input_str
         reply_message = await cobra.get_reply_message()
 
@@ -131,11 +129,11 @@ async def teamcobra(hehe):
         hehe.reply_to_msg_id
     cobra = await edit_or_reply(hehe, "Converting.....")
 
-    input_str = "dc.webp"
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if cobra.reply_to_msg_id:
         datetime.now()
+        input_str = "dc.webp"
         file_name = input_str
         reply_message = await cobra.get_reply_message()
 

@@ -25,7 +25,5 @@ async def _(event):
         )
     else:
         await event.edit(
-            "https://www.fileext.com/ responded with {} for query: {}".format(
-                status_code, input_str
-            )
+            f"https://www.fileext.com/ responded with {status_code} for query: {input_str}"
         )

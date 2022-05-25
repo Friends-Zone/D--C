@@ -18,7 +18,7 @@ async def _(event):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=1247032902)
             )
-            await event.client.send_message(chat, "/bin {}".format(danish))
+            await event.client.send_message(chat, f"/bin {danish}")
             respond = await response
         except YouBlockedUserError:
             await event.reply("Boss! Please Unblock @Carol5_bot ")
@@ -45,7 +45,7 @@ async def _(event):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=1247032902)
             )
-            await event.client.send_message(chat, "/vbv {}".format(danish))
+            await event.client.send_message(chat, f"/vbv {danish}")
             respond = await response
         except YouBlockedUserError:
             await event.reply("Boss! Please Unblock @Carol5_bot ")
@@ -72,7 +72,7 @@ async def _(event):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=1247032902)
             )
-            await event.client.send_message(chat, "/key {}".format(danish))
+            await event.client.send_message(chat, f"/key {danish}")
             response = await response
         except YouBlockedUserError:
             await event.reply("Boss! Please Unblock @Carol5_bot ")
@@ -98,7 +98,7 @@ async def _(event):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=1247032902)
             )
-            await event.client.send_message(chat, "/iban {}".format(danish))
+            await event.client.send_message(chat, f"/iban {danish}")
             response = await response
         except YouBlockedUserError:
             await event.reply("Boss! Please Unblock @Carol5_bot ")

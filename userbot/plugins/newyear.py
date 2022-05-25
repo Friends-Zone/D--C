@@ -11,7 +11,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 1
-    animation_ttl = range(0, 80)
+    animation_ttl = range(80)
     await event.edit("😊 HAPPY NEW YEAR 😁")
     animation_chars = [
         "💖HAPPY NEW YEAR💖",
@@ -32,7 +32,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 1
-    animation_ttl = range(0, 22)
+    animation_ttl = range(22)
     await event.edit("😊 HAPPY NEW YEAR TO ALL 😁")
     animation_chars = [
         """💜💜                        💜💜
